@@ -11,12 +11,27 @@ $color-text-primary: #434141;
 .navbar{
     @include cardbox;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-    margin: 3rem 2rem;
+    margin-top: 3rem;
+}
+
+.navbar_opt{
+    font-weight: bold;
+    margin: .5rem 1rem;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+
+    &:hover{
+        color: #000;
+        scale: 1.1;
+        transition: all 0.3s ease-in-out;
+    }
+
 }
 
 .container{
     margin-top: 3rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }

@@ -35,10 +35,11 @@ async function getData(gen: number): Promise<Pokemon[]> {
 }
 
 export default async function Home() {
-  const allPokemon = await getData(2);
+  const allPokemon = await getData(1);
 
   return (
     <main className={styles.main}>
+      <p className="bold text-xl bg-red-700" >Hello tailwind</p>
       <div className={styles.grid}>
         {allPokemon.map((pokemon) => {
           return <PokeCard key={pokemon.id} pokemon={pokemon} />;
