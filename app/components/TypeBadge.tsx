@@ -1,8 +1,7 @@
 /** @format */
 
 import React from "react";
-import { typesColor } from "../utils/types";
-import styles  from "./TypeBadge.module.scss";
+import { typesColor } from "../utils/commons";
 
 type Props = {
   type: string;
@@ -11,5 +10,5 @@ type Props = {
 export default function TypeBadge({ type }: Props) {
   const color = typesColor[type];
 
-  return <span className={styles.badge} style={{backgroundColor: color }} >{type}</span>;
+  return <span className="rounded-md mx-2 p-2 inline-block" style={{backgroundColor: color }} >{type}</span>;
 }
