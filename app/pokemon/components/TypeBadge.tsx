@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { typesColor } from "../utils/commons";
+import { typesColor } from "../../utils/commons";
 
 type Props = {
   type: string;

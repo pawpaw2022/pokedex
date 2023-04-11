@@ -1,4 +1,4 @@
-import PokeCard from '@/app/components/PokeCard';
+import PokeCard from '@/app/pokemon/components/PokeCard';
 import React from 'react'
 
 interface Props {
