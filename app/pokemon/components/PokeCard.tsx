@@ -15,12 +15,9 @@ interface Props {
 export default function PokeCard({ pokemon, gen }: Props) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
-  
-  localStorage.setItem(pokemon.name, JSON.stringify(pokemon));
-  
   return (
     <div
-      className="bg-white rounded-md border-solid border-2 m-2 cursor-pointer hover:scale-105 ease-in-out flex flex-col items-center"
+      className="card"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -42,7 +39,7 @@ export default function PokeCard({ pokemon, gen }: Props) {
             />
           )}
         </div>
-        <div className="flex flex-col items-center justify-center" >
+        <div className="flex flex-col items-center justify-center">
           <p className="text-sm text-slate-500 mt-6">#{pokemon.id}</p>
           <p className="text-md font-medium">{pokemon.name}</p>
           <div className="flex mt-3">

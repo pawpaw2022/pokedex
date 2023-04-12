@@ -1,6 +1,21 @@
 /** @format */
 import React from "react";
+import { getPokemonData } from "../utils/datafetch";
+import PokeCard from "./components/PokeCard";
+import PokeCardSkeleton from "./components/PokeCardSkeleton";
 
 export default async function Pokemon() {
-  return <></>;
+  const gen = 1;
+  const pokemons = await getPokemonData(gen);
+
+  return (
+    <>
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
+        {pokemons.map((pokemon) => {
+          return <PokeCard key={pokemon.id} pokemon={pokemon} gen={gen} />;
+          // return <PokeCardSkeleton />;
+        })}
+      </div>
+    </>
+  );
 }
