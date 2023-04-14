@@ -10,7 +10,7 @@ export default async function Pokemon() {
 
   return (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
         {pokemons.map((pokemon) => {
           return <PokeCard key={pokemon.id} pokemon={pokemon} gen={gen} />;
           // return <PokeCardSkeleton />;

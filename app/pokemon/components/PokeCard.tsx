@@ -22,14 +22,16 @@ export default function PokeCard({ pokemon, gen }: Props) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link href={`/pokemon/${pokemon.name}`}>
-        <div className="h-[40%]">
+        <div className="h-[40%] w-full">
           {isHovered && gen <= 5 ? (
-            <Image
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif`}
-              alt={pokemon.name}
-              height={130}
-              width={130}
-            />
+            <div className="">
+              <Image
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif`}
+                alt={pokemon.name}
+                height={130}
+                width={130}
+              />
+            </div>
           ) : (
             <Image
               src={pokemon.info.sprites.front_default}
