@@ -2,21 +2,37 @@
 
 "use client";
 /** @format */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import TypeBadge from "./TypeBadge";
 import Link from "next/link";
+import { useObserver } from "@/app/hooks/useObserver";
 
 interface Props {
   pokemon: Pokemon;
   gen: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  isLast: boolean;
+  nextPage: () => void;
 }
 
-export default function PokeCard({ pokemon, gen }: Props) {
+export default function PokeCard({ pokemon, gen, isLast, nextPage }: Props) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
+  const cardRef = React.useRef<HTMLDivElement>(null);
+  const entry = useObserver(cardRef, { rootMargin: "100px" });
+
+  useEffect(() => {
+    console.log(isLast);
+
+    if (!entry) return;
+    if (isLast && entry.isIntersecting) {
+      console.log("last");
+      nextPage();
+    }
+  }, [entry, isLast]);
 
   return (
     <div
+      ref={cardRef}
       className="card"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

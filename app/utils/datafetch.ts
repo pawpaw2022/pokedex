@@ -1,6 +1,22 @@
 import { gens } from "./commons";
 
 
+// export const getPokemonData = async(startId: number, amount: number): Promise<Pokemon[]> =>  {
+//     let pokemons: Pokemon[] = [];
+  
+//     for (let i = startId; i < startId+amount; i++) {
+//     // for (let i = 1; i <= 20; i++) {
+//       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
+//       const info: PokemonRawData = await response.json();
+  
+//       const id = info.id;
+//       const name = info.name;
+  
+//       pokemons = [...pokemons, { name, id, info }];
+//     }
+  
+//     return pokemons;
+//   }
 export const getPokemonData = async(gen: number): Promise<Pokemon[]> =>  {
     let pokemons: Pokemon[] = [];
   
