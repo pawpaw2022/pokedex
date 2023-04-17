@@ -5,7 +5,7 @@ import PokeCard from "./components/PokeCard";
 import PokeCardSkeleton from "./components/PokeCardSkeleton";
 
 export default async function Pokemon() {
-  const gen = 5;
+  const gen = 1;
   const pokemons = await getPokemonData(gen);
 
   return (
