@@ -36,8 +36,8 @@ export default function PokeCard({ pokemon, gen }: Props) {
         </div>
 
         <div className="flex flex-col items-center justify-center">
-          <p className="text-sm text-slate-500 mt-6">#{pokemon.id}</p>
-          <p className="text-md font-medium capitalize ">{pokemon.name}</p>
+          <p className="text-sm text-secondary mt-6">#{pokemon.id}</p>
+          <p className="text-md font-medium capitalize text-primary ">{pokemon.name}</p>
           <div className="flex mt-3">
             {pokemon.info.types.map((type) => {
               return <TypeBadge key={type.slot} type={type.type.name} />;

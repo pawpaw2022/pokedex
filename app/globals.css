@@ -4,17 +4,27 @@
   margin: 0;
 }
 
-body {
-  background: rgb(221, 228, 240);
-  margin: auto;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @layer components {
   .card {
     @apply max-w-sm p-2 m-3 flex justify-center bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700;
   }
+
+  .bg-color {
+    @apply bg-[#dde4f0] dark:bg-[#2f3540];
+  }
+
+  .text-primary {
+    @apply text-[#2f3540] dark:text-[#dde4f0];
+  }
+
+  .text-secondary {
+    @apply text-slate-500 dark:text-gray-200;
+  }
+
+
 }

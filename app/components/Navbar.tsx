@@ -18,13 +18,9 @@ export default function Navbar() {
   
 
   return (
-    <div className="flex flex-col justify-center items-center mt-6">
+    <div className="flex flex-col justify-center items-center">
       <Image src="/pokelogo.svg" alt="Pokemon Logo" height={300} width={300} />
-      <div className="flex bg-white mx-4 my-10 rounded-md">
-        {items.map((item, index) => {
-          return <NavbarItem key={index} name={item.name} url={item.url} />;
-        })}
-      </div>   
+
     </div>
   );
 }

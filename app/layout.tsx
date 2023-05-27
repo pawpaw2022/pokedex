@@ -14,10 +14,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" >
       <body>
-        <Navbar />
-        {children}
+        <main className="bg-color">
+          <Navbar />
+          {children}
+        </main>
       </body>
     </html>
   );

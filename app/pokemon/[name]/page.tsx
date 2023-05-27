@@ -16,7 +16,7 @@ export default async function PokemonDetail({ params: { name } }: Props) {
 
   return (
     <>
-      <div className="w-full mx-2">
+      <div className="w-full mx-2 text-primary">
         <Image
           className="rounded-md shadow-md"
           src={`https://img.pokemondb.net/artwork/${name}.jpg`}

@@ -2,7 +2,7 @@
 import React from "react";
 import { getPokemonData } from "../utils/datafetch";
 import PokeCard from "./components/PokeCard";
-import PokeCardSkeleton from "./components/PokeCardSkeleton";
+import Sidebar from "./components/Sidebar";
 
 export default async function Pokemon() {
   const gen = 1;
@@ -10,11 +10,15 @@ export default async function Pokemon() {
 
   return (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-        {pokemons.map((pokemon) => {
-          return <PokeCard key={pokemon.id} pokemon={pokemon} gen={gen} />;
-          // return <PokeCardSkeleton />;
-        })}
+      <div className="flex">
+        {/* <Sidebar /> */}
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+          {pokemons.map((pokemon) => {
+            return <PokeCard key={pokemon.id} pokemon={pokemon} gen={gen} />;
+            // return <PokeCardSkeleton />;
+          })}
+        </div>
       </div>
     </>
   );
