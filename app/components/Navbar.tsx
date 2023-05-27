@@ -24,7 +24,7 @@ export default function Navbar() {
         {items.map((item, index) => {
           return <NavbarItem key={index} name={item.name} url={item.url} />;
         })}
-      </div>
+      </div>   
     </div>
   );
 }

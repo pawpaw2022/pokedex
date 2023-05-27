@@ -13,7 +13,7 @@ export default function TypeBadge({ type }: Props) {
 
   return (
     <span
-      className="rounded-md mx-2 p-2 flex"
+      className="rounded-md mx-2 p-2 flex uppercase font-medium min-w-[95px] justify-center items-center text-sm"
       style={{ backgroundColor: color }}
     >
       <Image 
