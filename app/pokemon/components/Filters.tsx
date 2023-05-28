@@ -3,6 +3,7 @@
 import React from "react";
 import GenFilter from "./filters/GenFilter";
 import TypeFilter from "./filters/TypeFilter";
+import DarkModeToggle from "./filters/DarkModeToggle";
 
 type Props = {
   handleGenFilter: (gen: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8) => void;
@@ -15,6 +16,7 @@ export default function Filters({ handleGenFilter, handleTypeFilter }: Props) {
       <div className="flex flex-row justify-center items-center">
         <GenFilter handleGenFilter={handleGenFilter} />
         <TypeFilter handleTypeFilter={handleTypeFilter} />
+        <DarkModeToggle />
       </div>
     </>
   );
