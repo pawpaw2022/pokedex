@@ -3,10 +3,10 @@
 import React from "react";
 
 type Props = {
-  handleGen: (gen: number) => void;
+  handleGenFilter: (gen: number) => void;
 };
 
-export default function GenFilter( {handleGen}: Props) {
+export default function GenFilter( {handleGenFilter}: Props) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const [currentGen, setCurrentGen] = React.useState(1);
@@ -17,15 +17,15 @@ export default function GenFilter( {handleGen}: Props) {
   const handleClick = (gen: number) => {
     setCurrentGen(gen);
 
-    handleGen(gen);
+    handleGenFilter(gen);
 
     setIsOpen(false);
   };
 
   return (
     <>
-      <p>Generation</p>
       <div className="w-42">
+      <p className="text-center">Generation</p>
         <div>
           <button
             type="button"

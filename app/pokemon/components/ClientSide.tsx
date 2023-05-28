@@ -12,31 +12,55 @@ type Props = {
 };
 
 export default function ClientSide({ pokemons, gen }: Props) {
-  const [data, setData] = React.useState(pokemons);
-  const [currentGen, setCurrentGen] = React.useState(gen);
+  const [originalData, setOriginalData] = React.useState<Pokemon[]>(pokemons);
+  const [filteredData, setFilteredData] = React.useState<Pokemon[]>(pokemons);
+
+  const [currentGenFilter, setCurrentGenFilter] = React.useState(gen);
+  const [currentTypeFilter, setCurrentTypeFilter] = React.useState("all");
   const [isLoading, setIsLoading] = React.useState(false);
 
-  // client side fetch new data
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const res = await getPokemonData(currentGen);
-      setData(res);
-    };
-
+  const handleGenFilter = async (gen: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8) => {
+    setCurrentGenFilter(gen);
     setIsLoading(true);
-    fetchData();
+    const res = await getPokemonData(gen);
+    setOriginalData(res);
+
+    if (currentTypeFilter === "all") {
+      setFilteredData(res);
+    } else {
+      const filtered = res.filter((pokemon) => {
+        return pokemon.info.types.some(
+          (t) => t.type.name.toLowerCase() === currentTypeFilter.toLowerCase()
+        );
+      });
+      setFilteredData(filtered);
+    }
     setIsLoading(false);
+  };
 
-    console.log("fetching data", currentGen);
-  }, [currentGen]);
+  const handleTypeFilter = (type: string) => {
+    if (type.toLowerCase() === "all") {
+      setFilteredData(originalData);
+      setCurrentTypeFilter("all");
+      return;
+    }
 
-  const handleGen = (gen: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8) => {
-    setCurrentGen(gen);
+    const filtered = originalData.filter((pokemon) => {
+      return pokemon.info.types.some(
+        (t) => t.type.name.toLowerCase() === type.toLowerCase()
+      );
+    });
+
+    setCurrentTypeFilter(type);
+    setFilteredData(filtered);
   };
 
   return (
     <>
-      <Filters handleGen={handleGen} />
+      <Filters
+        handleGenFilter={handleGenFilter}
+        handleTypeFilter={handleTypeFilter}
+      />
 
       {isLoading ? (
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
@@ -48,8 +72,14 @@ export default function ClientSide({ pokemons, gen }: Props) {
         </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-          {data.map((pokemon) => {
-            return <PokeCard key={pokemon.id} pokemon={pokemon} gen={gen} />;
+          {filteredData.map((pokemon) => {
+            return (
+              <PokeCard
+                key={pokemon.id}
+                pokemon={pokemon}
+                gen={currentGenFilter}
+              />
+            );
             // return <PokeCardSkeleton />;
           })}
         </div>
