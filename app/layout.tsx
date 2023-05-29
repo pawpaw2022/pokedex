@@ -1,7 +1,9 @@
 /** @format */
 
+import Providers from "./Providers";
 import Navbar from "./components/Navbar";
 import "./globals.css";
+import { ServerThemeProvider } from "next-themes";
 
 export const metadata = {
   title: "Pokedex Pro",
@@ -14,13 +16,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" >
-      <body>
-        <main className="bg-color w-full h-screen py-6">
-          <Navbar />
-          {children}
-        </main>
-      </body>
-    </html>
+    <ServerThemeProvider attribute="class">
+      <html lang="en">
+        <body>
+          <Providers>
+            <main className="bg-color w-full h-full min-h-screen py-6">
+              <Navbar />
+              {children}
+            </main>
+          </Providers>
+        </body>
+      </html>
+    </ServerThemeProvider>
   );
 }
