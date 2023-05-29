@@ -47,7 +47,7 @@ export default function TypeFilter({ handleTypeFilter }: Props) {
   return (
     <>
       <div className="w-30 ml-2">
-        <p className="text-center">Types</p>
+        <p className="text-center">Type</p>
         <div>
           <button
             type="button"

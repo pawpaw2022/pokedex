@@ -9,14 +9,9 @@ export default async function Pokemon() {
   const gen = 1;
   const pokemons = await getPokemonData(gen);
 
-  
-
   return (
     <>
-
-    <ClientSide pokemons={pokemons} gen={1} />
-    
-      
+      <ClientSide pokemons={pokemons} gen={1} />
     </>
   );
 }

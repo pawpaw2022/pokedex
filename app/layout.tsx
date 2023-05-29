@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <body>
-        <main className="bg-color">
+        <main className="bg-color w-full h-screen py-6">
           <Navbar />
           {children}
         </main>

@@ -14,12 +14,15 @@ type Props = {
 export default function ClientSide({ pokemons, gen }: Props) {
   const [originalData, setOriginalData] = React.useState<Pokemon[]>(pokemons);
   const [filteredData, setFilteredData] = React.useState<Pokemon[]>(pokemons);
+  const [filteredTypeData, setFilteredTypeData] = React.useState<Pokemon[]>(pokemons);
 
+  const [searchTerm, setSearchTerm] = React.useState("");
   const [currentGenFilter, setCurrentGenFilter] = React.useState(gen);
   const [currentTypeFilter, setCurrentTypeFilter] = React.useState("all");
   const [isLoading, setIsLoading] = React.useState(false);
 
   const handleGenFilter = async (gen: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8) => {
+    setSearchTerm("");
     setCurrentGenFilter(gen);
     setIsLoading(true);
     const res = await getPokemonData(gen);
@@ -36,12 +39,15 @@ export default function ClientSide({ pokemons, gen }: Props) {
       setFilteredData(filtered);
     }
     setIsLoading(false);
+
   };
 
   const handleTypeFilter = (type: string) => {
     if (type.toLowerCase() === "all") {
       setFilteredData(originalData);
+      setFilteredTypeData(originalData);
       setCurrentTypeFilter("all");
+      setSearchTerm("");
       return;
     }
 
@@ -53,6 +59,23 @@ export default function ClientSide({ pokemons, gen }: Props) {
 
     setCurrentTypeFilter(type);
     setFilteredData(filtered);
+    setFilteredTypeData(filtered);
+    setSearchTerm("");
+
+  };
+
+  const handleSearch = (search: string) => {
+    if (search === "") {
+      setFilteredData(originalData);
+      handleTypeFilter(currentTypeFilter);
+      return;
+    }
+
+    const filtered = filteredTypeData.filter((pokemon) => {
+      return pokemon.info.name.includes(search.toLowerCase());
+    });
+
+    setFilteredData(filtered);
   };
 
   return (
@@ -60,6 +83,9 @@ export default function ClientSide({ pokemons, gen }: Props) {
       <Filters
         handleGenFilter={handleGenFilter}
         handleTypeFilter={handleTypeFilter}
+        handleSearch={handleSearch}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
       />
 
       {isLoading ? (
@@ -80,7 +106,6 @@ export default function ClientSide({ pokemons, gen }: Props) {
                 gen={currentGenFilter}
               />
             );
-            // return <PokeCardSkeleton />;
           })}
         </div>
       )}
