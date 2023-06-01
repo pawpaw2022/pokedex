@@ -59,6 +59,6 @@ type PokemonList = {
   }[];
 };
 
-type Generation = {
+type Type = {
     
 };

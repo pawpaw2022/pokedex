@@ -1,7 +1,7 @@
 /** @format */
 
 import { useQuery } from "@tanstack/react-query";
-import { gens } from "./config";
+import { gens, typeCode } from "./config";
 
 export const getPokemonData = async (gen: number): Promise<Pokemon[]> => {
   let pokemons: Pokemon[] = [];
@@ -60,9 +60,10 @@ export const usePokemon = (id: number | string) => {
   return { data, isLoading, isError };
 };
 
-export const usePokemonList = (offset: number, limit: number) => {
+
+export const useAllPokemonList = () => {
   const queryFn = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`);
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=2000');
     const data: PokemonList = await response.json();
 
     return data as PokemonList;
@@ -77,16 +78,19 @@ export const usePokemonList = (offset: number, limit: number) => {
   return { data, isLoading, isError };
 };
 
-export const useAllPokemonList = () => {
-  const queryFn = async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
-    const data: PokemonList = await response.json();
+export const useType = (type: string) => {
 
-    return data as PokemonList;
+  const queryFn = async () => {
+    const code = typeCode[type.toLowerCase()];
+
+    const response = await fetch(`https://pokeapi.co/api/v2/type/${code}`);
+    const data = await response.json();
+
+    return data;
   };
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["pokemonList"],
+    queryKey: ["pokemonType", type],
     queryFn,
     staleTime: 1000 * 60 * 60 * 24 * 7, // 1 week
   });

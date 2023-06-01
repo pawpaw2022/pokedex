@@ -17,10 +17,9 @@ interface Props {
 export default function PokeCard({ pokemon }: Props) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
-  
-  const {data, isLoading} = usePokemon(pokemon);
-  const bgColor = typesColor[data?.types[0].type.name]+(isHovered ? "80" : "50");
-  
+  const { data, isLoading } = usePokemon(pokemon);
+  const bgColor =
+    typesColor[data?.types[0].type.name] + (isHovered ? "80" : "50");
 
   if (isLoading) return <PokeCardSkeleton />;
 
@@ -43,7 +42,9 @@ export default function PokeCard({ pokemon }: Props) {
 
         <div className="flex flex-col items-center justify-center">
           <p className="text-sm text-secondary mt-6">#{data?.id}</p>
-          <p className="text-md font-medium capitalize text-primary ">{data?.name}</p>
+          <p className="text-md font-medium capitalize text-primary ">
+            {data?.name}
+          </p>
           <div className="flex mt-3">
             {data?.types.map((type) => {
               return <TypeBadge key={type.slot} type={type.type.name} />;

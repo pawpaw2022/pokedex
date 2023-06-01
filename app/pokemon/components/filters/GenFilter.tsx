@@ -10,7 +10,7 @@ export default function GenFilter( {handleGenFilter}: Props) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const [currentGen, setCurrentGen] = React.useState(1);
-  const gens = [1, 2, 3, 4, 5, 6, 7, 8];
+  const gens = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   const toggle = () => setIsOpen((prev) => !prev);
 

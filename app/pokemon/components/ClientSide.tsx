@@ -7,7 +7,7 @@ import {
   getPokemonData,
   useAllPokemonList,
   usePokemon,
-  usePokemonList,
+  useType,
 } from "@/app/utils/datafetch";
 import PokeCardSkeleton from "./PokeCardSkeleton";
 import { gens } from "@/app/utils/config";
@@ -84,30 +84,55 @@ export default function ClientSide({ pokemons, gen }: Props) {
   //   setFilteredData(filtered);
   // };
 
+  // data
+
   const [searchTerm, setSearchTerm] = useState("");
   const [currentGenFilter, setCurrentGenFilter] = useState(1);
   const [currentTypeFilter, setCurrentTypeFilter] = useState("all");
 
-
-  // const [currentPokemonList, setCurrentPokemonList] = React.useState<PokemonList>({} as PokemonList);
-
-  // const {
-  //   data: pokemonList,
-  // } = useAllPokemonList();
-  const {
-    data: pokemonList,
-  } = usePokemonList(gens[currentGenFilter][0], gens[currentGenFilter][1]);
-
-  const handleGenFilter = () => {
-    console.log("handleGenFilter");
+  const { data: allData, isLoading } = useAllPokemonList();
+  const pokemonGenList = {
+    1: allData?.results.slice(0, 151),
+    2: allData?.results.slice(151, 251),
+    3: allData?.results.slice(251, 386),
+    4: allData?.results.slice(386, 493),
+    5: allData?.results.slice(493, 649),
+    6: allData?.results.slice(649, 721),
+    7: allData?.results.slice(721, 809),
+    8: allData?.results.slice(809, 898),
+    9: allData?.results.slice(898, 1010),
   };
 
-  const handleTypeFilter = () => {
-    console.log("handleTypeFilter");
+  const currentList = pokemonGenList[currentGenFilter];
+  const [filteredList, setFilteredList] = useState([]);
+  // console.log("filteredList", filteredList);
+
+  if (!isLoading && !filteredList) {
+    setFilteredList(currentList);
+  }
+
+  const handleGenFilter = (gen: number) => {
+    setCurrentGenFilter(gen);
+    setSearchTerm("");
+    setFilteredList(pokemonGenList[gen]);
   };
 
-  const handleSearch = () => {
-    console.log("handleSearch");
+  const handleTypeFilter = (type: string) => {
+    setCurrentTypeFilter(type);
+  };
+
+  const handleSearch = (search: string) => {
+    setSearchTerm(search);
+
+    if (search === "") {
+      setFilteredList(currentList);
+      return;
+    }
+
+    const filtered = currentList.filter((pokemon) => {
+      return pokemon.name.includes(search.toLowerCase());
+    });
+    setFilteredList(filtered);
   };
 
   return (
@@ -121,32 +146,10 @@ export default function ClientSide({ pokemons, gen }: Props) {
       />
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-        { pokemonList?.results.map((pokemon, index) => {
+        {filteredList?.map((pokemon, index) => {
           return <PokeCard key={index} pokemon={pokemon.name} />;
         })}
       </div>
-
-      {/* {isLoading ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
-          {Array(100)
-            .fill(0)
-            .map((_, i) => (
-              <PokeCardSkeleton key={i} />
-            ))}
-        </div>
-      ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-          {filteredData.map((pokemon) => {
-            return (
-              <PokeCard
-                key={pokemon.id}
-                pokemon={pokemon}
-                gen={currentGenFilter}
-              />
-            );
-          })}
-        </div>
-      )} */}
     </>
   );
 }

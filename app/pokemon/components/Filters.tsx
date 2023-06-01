@@ -1,5 +1,5 @@
 /** @format */
-
+'use client'
 import React from "react";
 import GenFilter from "./filters/GenFilter";
 import TypeFilter from "./filters/TypeFilter";
