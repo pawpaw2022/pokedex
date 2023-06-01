@@ -7,10 +7,14 @@ import { getPokemonData, useGeneration, useSinglePokemon } from "@/app/utils/dat
 import PokeCardSkeleton from "./PokeCardSkeleton";
 
 type Props = {
-  pokemons: PokemonData[];
+  pokemons: Pokemon[];
   gen: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 };
 
+export default function ClientSide({ pokemons, gen }: Props) {
+  const [originalData, setOriginalData] = React.useState<Pokemon[]>(pokemons);
+  const [filteredData, setFilteredData] = React.useState<Pokemon[]>(pokemons);
+  const [filteredTypeData, setFilteredTypeData] = React.useState<Pokemon[]>(pokemons);
 export default function ClientSide({ pokemons, gen }: Props) {
   const [originalData, setOriginalData] =
     React.useState<PokemonData[]>(pokemons);
@@ -28,7 +32,6 @@ export default function ClientSide({ pokemons, gen }: Props) {
     setSearchTerm("");
     setCurrentGenFilter(gen);
     setIsLoading(true);
-    // const res = fetchGenData(gen);
     const res = await getPokemonData(gen);
     setOriginalData(res);
 
@@ -36,7 +39,7 @@ export default function ClientSide({ pokemons, gen }: Props) {
       setFilteredData(res);
     } else {
       const filtered = res.filter((pokemon) => {
-        return pokemon.types.some(
+        return pokemon.info.types.some(
           (t) => t.type.name.toLowerCase() === currentTypeFilter.toLowerCase()
         );
       });
@@ -55,7 +58,7 @@ export default function ClientSide({ pokemons, gen }: Props) {
     }
 
     const filtered = originalData.filter((pokemon) => {
-      return pokemon.types.some(
+      return pokemon.info.types.some(
         (t) => t.type.name.toLowerCase() === type.toLowerCase()
       );
     });
@@ -74,16 +77,11 @@ export default function ClientSide({ pokemons, gen }: Props) {
     }
 
     const filtered = filteredTypeData.filter((pokemon) => {
-      return pokemon.name.includes(search.toLowerCase());
+      return pokemon.info.name.includes(search.toLowerCase());
     });
 
     setFilteredData(filtered);
   };
-
-  console.log("filteredData", filteredData);
-
-  // const test = useGeneration(currentGenFilter);
-  // console.log("test", test);
 
   return (
     <>

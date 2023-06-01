@@ -9,13 +9,14 @@ import Link from "next/link";
 import { typesColor } from "@/app/utils/commons";
 
 interface Props {
-  pokemon: PokemonData;
+  pokemon: Pokemon;
+  gen: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 }
 
 export default function PokeCard({ pokemon }: Props) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
-  const bgColor = typesColor[pokemon.types[0].type.name]+(isHovered ? "80" : "50");
+  const bgColor = typesColor[pokemon.info.types[0].type.name]+(isHovered ? "80" : "50");
 
   return (
     <div
@@ -27,7 +28,7 @@ export default function PokeCard({ pokemon }: Props) {
       <Link href={`/pokemon/${pokemon.name}`}>
         <div className="w-full flex justify-center">
           <Image
-            src={pokemon.sprites.front_default}
+            src={pokemon.info.sprites.front_default}
             alt={pokemon.name}
             height={160}
             width={160}
@@ -38,7 +39,7 @@ export default function PokeCard({ pokemon }: Props) {
           <p className="text-sm text-secondary mt-6">#{pokemon.id}</p>
           <p className="text-md font-medium capitalize text-primary ">{pokemon.name}</p>
           <div className="flex mt-3">
-            {pokemon.types.map((type) => {
+            {pokemon.info.types.map((type) => {
               return <TypeBadge key={type.slot} type={type.type.name} />;
             })}
           </div>

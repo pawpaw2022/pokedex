@@ -1,6 +1,6 @@
 /** @format */
 
-type PokemonData = {
+type PokemonRawData = {
   abilities: {
     ability: { name: string; url: string };
     is_hidden: boolean;
@@ -46,6 +46,12 @@ type PokemonData = {
     type: { name: string; url: string };
   }[];
   weight: number;
+};
+
+type Pokemon = {
+  name: string;
+  id: number;
+  info: PokemonRawData;
 };
 
 type PokemonList = {
