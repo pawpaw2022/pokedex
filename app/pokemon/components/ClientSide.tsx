@@ -3,7 +3,7 @@
 import React from "react";
 import Filters from "./Filters";
 import PokeCard from "./PokeCard";
-import { getPokemonData } from "@/app/utils/datafetch";
+import { getPokemonData, useGeneration, useSinglePokemon } from "@/app/utils/datafetch";
 import PokeCardSkeleton from "./PokeCardSkeleton";
 
 type Props = {
@@ -11,13 +11,13 @@ type Props = {
   gen: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 };
 
-export default function ClientSide({pokemons, gen}: Props) {
-
-
-
-  const [originalData, setOriginalData] = React.useState<PokemonData[]>(pokemons);
-  const [filteredData, setFilteredData] = React.useState<PokemonData[]>(pokemons);
-  const [filteredTypeData, setFilteredTypeData] = React.useState<PokemonData[]>(pokemons);
+export default function ClientSide({ pokemons, gen }: Props) {
+  const [originalData, setOriginalData] =
+    React.useState<PokemonData[]>(pokemons);
+  const [filteredData, setFilteredData] =
+    React.useState<PokemonData[]>(pokemons);
+  const [filteredTypeData, setFilteredTypeData] =
+    React.useState<PokemonData[]>(pokemons);
 
   const [searchTerm, setSearchTerm] = React.useState("");
   const [currentGenFilter, setCurrentGenFilter] = React.useState(gen);
@@ -43,7 +43,6 @@ export default function ClientSide({pokemons, gen}: Props) {
       setFilteredData(filtered);
     }
     setIsLoading(false);
-
   };
 
   const handleTypeFilter = (type: string) => {
@@ -65,7 +64,6 @@ export default function ClientSide({pokemons, gen}: Props) {
     setFilteredData(filtered);
     setFilteredTypeData(filtered);
     setSearchTerm("");
-
   };
 
   const handleSearch = (search: string) => {
@@ -84,6 +82,8 @@ export default function ClientSide({pokemons, gen}: Props) {
 
   console.log("filteredData", filteredData);
 
+  // const test = useGeneration(currentGenFilter);
+  // console.log("test", test);
 
   return (
     <>
@@ -110,7 +110,6 @@ export default function ClientSide({pokemons, gen}: Props) {
               <PokeCard
                 key={pokemon.id}
                 pokemon={pokemon}
-                gen={currentGenFilter}
               />
             );
           })}

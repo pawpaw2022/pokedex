@@ -10,10 +10,9 @@ import { typesColor } from "@/app/utils/commons";
 
 interface Props {
   pokemon: PokemonData;
-  gen: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 }
 
-export default function PokeCard({ pokemon, gen }: Props) {
+export default function PokeCard({ pokemon }: Props) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const bgColor = typesColor[pokemon.types[0].type.name]+(isHovered ? "80" : "50");
