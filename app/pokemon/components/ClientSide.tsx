@@ -7,14 +7,17 @@ import { getPokemonData } from "@/app/utils/datafetch";
 import PokeCardSkeleton from "./PokeCardSkeleton";
 
 type Props = {
-  pokemons: Pokemon[];
+  pokemons: PokemonData[];
   gen: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 };
 
-export default function ClientSide({ pokemons, gen }: Props) {
-  const [originalData, setOriginalData] = React.useState<Pokemon[]>(pokemons);
-  const [filteredData, setFilteredData] = React.useState<Pokemon[]>(pokemons);
-  const [filteredTypeData, setFilteredTypeData] = React.useState<Pokemon[]>(pokemons);
+export default function ClientSide({pokemons, gen}: Props) {
+
+
+
+  const [originalData, setOriginalData] = React.useState<PokemonData[]>(pokemons);
+  const [filteredData, setFilteredData] = React.useState<PokemonData[]>(pokemons);
+  const [filteredTypeData, setFilteredTypeData] = React.useState<PokemonData[]>(pokemons);
 
   const [searchTerm, setSearchTerm] = React.useState("");
   const [currentGenFilter, setCurrentGenFilter] = React.useState(gen);
@@ -25,6 +28,7 @@ export default function ClientSide({ pokemons, gen }: Props) {
     setSearchTerm("");
     setCurrentGenFilter(gen);
     setIsLoading(true);
+    // const res = fetchGenData(gen);
     const res = await getPokemonData(gen);
     setOriginalData(res);
 
@@ -32,7 +36,7 @@ export default function ClientSide({ pokemons, gen }: Props) {
       setFilteredData(res);
     } else {
       const filtered = res.filter((pokemon) => {
-        return pokemon.info.types.some(
+        return pokemon.types.some(
           (t) => t.type.name.toLowerCase() === currentTypeFilter.toLowerCase()
         );
       });
@@ -52,7 +56,7 @@ export default function ClientSide({ pokemons, gen }: Props) {
     }
 
     const filtered = originalData.filter((pokemon) => {
-      return pokemon.info.types.some(
+      return pokemon.types.some(
         (t) => t.type.name.toLowerCase() === type.toLowerCase()
       );
     });
@@ -72,11 +76,14 @@ export default function ClientSide({ pokemons, gen }: Props) {
     }
 
     const filtered = filteredTypeData.filter((pokemon) => {
-      return pokemon.info.name.includes(search.toLowerCase());
+      return pokemon.name.includes(search.toLowerCase());
     });
 
     setFilteredData(filtered);
   };
+
+  console.log("filteredData", filteredData);
+
 
   return (
     <>
