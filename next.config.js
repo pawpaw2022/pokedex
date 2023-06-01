@@ -23,6 +23,12 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "img.pokemondb.net",
+        port: "",
+        pathname: "/sprites/home/normal/**.png",
+      },
+      {
+        protocol: "https",
         hostname: "play.pokemonshowdown.com",
         port: "",
         pathname: "/sprites/xyani/**.gif",
