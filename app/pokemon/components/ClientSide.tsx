@@ -5,7 +5,6 @@ import Filters from "./Filters";
 import PokeCard from "./PokeCard";
 import { useAllPokemonList, useAllTypes } from "@/app/utils/datafetch";
 
-
 export default function ClientSide() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentGenFilter, setCurrentGenFilter] = useState(1);
@@ -24,7 +23,6 @@ export default function ClientSide() {
     8: allData?.results.slice(809, 898),
     9: allData?.results.slice(898, 1010),
   };
-
 
   // get all types
   const { data: allTypes } = useAllTypes();
@@ -47,7 +45,6 @@ export default function ClientSide() {
     if (currentTypeFilter !== "all") {
       handleTypeFilter(currentTypeFilter, pokemonGenList[gen]);
     }
-
   };
 
   const handleTypeFilter = (
@@ -69,14 +66,17 @@ export default function ClientSide() {
     });
     setFilteredList(filteredTypeList);
     setFilteredTypeList(filteredTypeList);
-
   };
 
   const handleSearch = (search: string) => {
     setSearchTerm(search);
 
     if (search === "") {
-      setFilteredList(filteredTypeList);
+      if (currentTypeFilter !== "all") {
+        setFilteredList(filteredTypeList);
+      } else {
+        setFilteredList(currentList);
+      }
       return;
     }
     const filtered = filteredTypeList.filter((pokemon) => {
@@ -100,7 +100,6 @@ export default function ClientSide() {
           return <PokeCard key={index} pokemon={pokemon.name} />;
         })}
       </div>
-
     </>
   );
 }
