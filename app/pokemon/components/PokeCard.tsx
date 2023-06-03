@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import TypeBadge from "./TypeBadge";
 import Link from "next/link";
-import { typesColor } from "@/app/utils/config";
+import { imageNameConvention, typesColor } from "@/app/utils/config";
 import { usePokemon } from "@/app/utils/datafetch";
 import PokeCardSkeleton from "./PokeCardSkeleton";
 
@@ -23,6 +23,8 @@ export default function PokeCard({ pokemon }: Props) {
 
   if (isLoading) return <PokeCardSkeleton />;
 
+  
+
   return (
     <div
       className="card"
@@ -33,7 +35,7 @@ export default function PokeCard({ pokemon }: Props) {
       <Link href={`/pokemon/${data?.name}`}>
         <div className="w-full flex justify-center">
           <Image
-            src={`https://img.pokemondb.net/sprites/home/normal/${data?.name}.png`}
+            src={`https://img.pokemondb.net/sprites/home/normal/${imageNameConvention(data?.name)}.png`}
             alt={data?.name}
             height={160}
             width={160}

@@ -56,3 +56,15 @@ export const typeCode = [
   { name: "Dark", id: 17 },
   { name: "Fairy", id: 18 },
 ];
+
+export const imageNameConvention = (name: string) => {
+  if (name.includes("minior-red-meteor")) {
+    return name.replace("-red-meteor", "").toLowerCase();
+  }
+
+  if (name.includes("mimikyu-disguised")) {
+    return name.replace("-disguised", "").toLowerCase();
+  }
+
+  return name.toLowerCase();
+}
