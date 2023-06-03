@@ -1,6 +1,6 @@
 /** @format */
 
-type PokemonRawData = {
+type Pokemon = {
   abilities: {
     ability: { name: string; url: string };
     is_hidden: boolean;
@@ -48,12 +48,6 @@ type PokemonRawData = {
   weight: number;
 };
 
-type Pokemon = {
-  name: string;
-  id: number;
-  info: PokemonRawData;
-};
-
 type PokemonList = {
   count: number;
   next: string;
@@ -64,6 +58,92 @@ type PokemonList = {
   }[];
 };
 
-type Generation = {
-    
+type Type = {
+  damage_relations: {
+    double_damage_from: {
+      name: string;
+      url: string;
+    }[];
+    double_damage_to: {
+      name: string;
+      url: string;
+    }[];
+    half_damage_from: {
+      name: string;
+      url: string;
+    }[];
+    half_damage_to: {
+      name: string;
+      url: string;
+    }[];
+    no_damage_from: {
+      name: string;
+      url: string;
+    }[];
+    no_damage_to: {
+      name: string;
+      url: string;
+    }[];
+  };
+  game_indices: {
+    game_index: number;
+    generation: {
+      name: string;
+      url: string;
+    };
+  }[];
+  generation: {
+    name: string;
+    url: string;
+  };
+  id: number;
+  move_damage_class: {
+    name: string;
+    url: string;
+  };
+  moves: {
+    name: string;
+    url: string;
+  }[];
+  name: string;
+  names: {
+    language: {
+      name: string;
+      url: string;
+    };
+    name: string;
+  }[];
+  pokemon: {
+    pokemon: {
+      name: string;
+      url: string;
+    };
+    slot: number;
+  }[];
 };
+
+type AllTypes = {
+  normal: Type;
+  fighting: Type;
+  flying: Type;
+  poison: Type;
+  ground: Type;
+  rock: Type;
+  bug: Type;
+  ghost: Type;
+  steel: Type;
+  fire: Type;
+  water: Type;
+  grass: Type;
+  electric: Type;
+  psychic: Type;
+  ice: Type;
+  dragon: Type;
+  dark: Type;
+  fairy: Type;
+};
+
+type CurrentList = {
+  name: string;
+  url: string;
+}[];
