@@ -1,8 +1,8 @@
 /** @format */
 "use client";
-import { getSinglePokemonData } from "@/app/utils/datafetch";
+import {  usePokemon } from "@/app/utils/datafetch";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import TypeBadge from "../components/TypeBadge";
 
 interface Props {
@@ -12,11 +12,12 @@ interface Props {
 }
 
 export default async function PokemonDetail({ params: { name } }: Props) {
-  const pokemonInfo: Pokemon = await getSinglePokemonData(name);
+
+  // const {data: pokemonInfo}: Pokemon = usePokemon(name);
 
   return (
     <>
-      <div className="w-full mx-2 text-primary">
+      {/* <div className="w-full mx-2 text-primary">
         <Image
           className="rounded-md shadow-md"
           src={`https://img.pokemondb.net/artwork/${name}.jpg`}
@@ -50,7 +51,7 @@ export default async function PokemonDetail({ params: { name } }: Props) {
             return <p key={move.move.name}>{move.move.name}</p>;
           })}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
