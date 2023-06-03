@@ -6,7 +6,7 @@ type Props = {
   handleGenFilter: (gen: number) => void;
 };
 
-export default function GenFilter( {handleGenFilter}: Props) {
+export default function GenFilter({ handleGenFilter }: Props) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const [currentGen, setCurrentGen] = React.useState(1);
@@ -25,7 +25,7 @@ export default function GenFilter( {handleGenFilter}: Props) {
   return (
     <>
       <div className="w-42">
-      <p className="text-center">Generation</p>
+        <p className="text-center">Generation</p>
         <div>
           <button
             type="button"
@@ -52,9 +52,10 @@ export default function GenFilter( {handleGenFilter}: Props) {
             <div className="py-1">
               {gens.map((gen) => {
                 return (
-                  <div className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
-                  onClick={() => handleClick(gen)}
-                  key={gen}
+                  <div
+                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
+                    onClick={() => handleClick(gen)}
+                    key={gen}
                   >
                     {gen === 0 ? "All" : `Gen ${gen}`}
                   </div>
