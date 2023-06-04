@@ -38,22 +38,22 @@ export const gens = {
 
 export const typeCode = [
   { name: "All", id: 0 },
-  { name: "Normal", id: 1 },
-  { name: "Fighting", id: 2 },
-  { name: "Flying", id: 3 },
-  { name: "Poison", id: 4 },
-  { name: "Ground", id: 5 },
+  { name: "Fire", id: 1 },
+  { name: "Water", id: 2 },
+  { name: "Grass", id: 3 },
+  { name: "Electric", id: 4 },
+  { name: "Normal", id: 5 },
   { name: "Rock", id: 6 },
-  { name: "Bug", id: 7 },
-  { name: "Ghost", id: 8 },
-  { name: "Steel", id: 9 },
-  { name: "Fire", id: 10 },
-  { name: "Water", id: 11 },
-  { name: "Grass", id: 12 },
-  { name: "Electric", id: 13 },
-  { name: "Psychic", id: 14 },
+  { name: "Psychic", id: 7 },
+  { name: "Dragon", id: 8 },
+  { name: "Fighting", id: 9 },
+  { name: "Poison", id: 10 },
+  { name: "Ground", id: 11 },
+  { name: "Bug", id: 12 },
+  { name: "Flying", id: 13 },
+  { name: "Ghost", id: 14 },
   { name: "Ice", id: 15 },
-  { name: "Dragon", id: 16 },
+  { name: "Steel", id: 16 },
   { name: "Dark", id: 17 },
   { name: "Fairy", id: 18 },
 ];
@@ -68,4 +68,4 @@ export const imageNameConvention = (name: string) => {
   }
 
   return name.toLowerCase();
-}
+};
