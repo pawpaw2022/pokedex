@@ -55,14 +55,14 @@ export default function ClientSide() {
     mutingList: CurrentList = currentList
   ) => {
     setCurrentTypeFilter(type);
-    setSearchTerm("");
-
+    setSearchTerm("");    
+    
     if (type.toLowerCase() === "all") {
       setFilteredList(mutingList);
       setFilteredTypeList(mutingList);
       return;
     }
-    const filtered = allTypes[type]?.["pokemon"].map((p) => p.pokemon);
+    const filtered = allTypes[type]?.["pokemon"].map((p) => p.pokemon);    
 
     const filteredTypeList = mutingList.filter((pokemon) => {
       return filtered?.some((p) => p.name === pokemon.name);

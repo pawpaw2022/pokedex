@@ -60,12 +60,17 @@ export const useAllTypes = () => {
   const allTypes = {} as AllTypes;
 
   for (let i = 1; i <= 18; i++) {
-    const {data, isError} = useType(i);
+
+    const fid = typeCode.find((_, j) => j === i).fid;
+
+    const {data, isError} = useType(fid);
 
     if (isError) 
       return {data: null, isLoading: false, isError: true};
 
     const type = typeCode.find((_, j) => j === i);
+    console.log(type);
+    
 
     allTypes[type.name] = data;
   }

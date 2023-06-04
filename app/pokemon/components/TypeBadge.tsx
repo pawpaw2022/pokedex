@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { typesColor } from "../../utils/config";
+import { typeCode } from "../../utils/config";
 import Image from "next/image";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function TypeBadge({ type }: Props) {
-  const color = typesColor[type];
+  const color = typeCode.find((t) => t.name.toLowerCase() === type)?.color;  
 
   return (
     <span
