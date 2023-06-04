@@ -55,14 +55,14 @@ export default function ClientSide() {
     mutingList: CurrentList = currentList
   ) => {
     setCurrentTypeFilter(type);
-    setSearchTerm("");    
-    
+    setSearchTerm("");
+
     if (type.toLowerCase() === "all") {
       setFilteredList(mutingList);
       setFilteredTypeList(mutingList);
       return;
     }
-    const filtered = allTypes[type]?.["pokemon"].map((p) => p.pokemon);    
+    const filtered = allTypes[type]?.["pokemon"].map((p) => p.pokemon);
 
     const filteredTypeList = mutingList.filter((pokemon) => {
       return filtered?.some((p) => p.name === pokemon.name);
@@ -88,31 +88,35 @@ export default function ClientSide() {
     setFilteredList(filtered);
   };
 
-
   return (
     <>
-        <div className="md:flex justify-center md:w-[90%] mx-auto">
-          <GenSideBar handleGenFilter={handleGenFilter} />
-          <div className="md:p-4 rounded-lg shadow-lg border-2 border-solid border-gray-400 dark:border-gray-700
+      <div className="md:flex justify-center md:w-[90%] mx-auto">
+        <GenSideBar handleGenFilter={handleGenFilter} />
+        <div
+          className="md:p-4 rounded-lg shadow-lg border-2 border-solid border-gray-400 dark:border-gray-700
            bg-slate-300 dark:bg-slate-700"
-           >
-            <Filters
-              handleGenFilter={handleGenFilter}
-              handleTypeFilter={handleTypeFilter}
-              handleSearch={handleSearch}
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-            />
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {filteredList?.map((pokemon, index) => {
-                return <PokeCard key={index} pokemon={pokemon.name} />;
-              })}
-            </div>
+        >
+          <Filters
+            handleGenFilter={handleGenFilter}
+            handleTypeFilter={handleTypeFilter}
+            handleSearch={handleSearch}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+          />
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {filteredList?.map((pokemon, index) => {
+              return <PokeCard key={index} pokemon={pokemon.name} />;
+            })}
           </div>
-
-          <TypeSideBar handleTypeFilter={handleTypeFilter} />
-
+            {filteredList?.length === 0 && (
+              <div className="flex flex-col justify-center items-center lg:w-[700px] xl:w-[980px] mt-6">
+                <h1 className="text-2xl font-bold uppercase">No pokemon found</h1>
+              </div>
+            )}
         </div>
+
+        <TypeSideBar handleTypeFilter={handleTypeFilter} />
+      </div>
     </>
   );
 }

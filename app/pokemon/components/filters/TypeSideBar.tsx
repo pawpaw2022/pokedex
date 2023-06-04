@@ -31,7 +31,6 @@ export default function TypeSideBar({handleTypeFilter}: Props ) {
                   my-2 w-full flex border-x-0 border-b-2 border-t-0 border-transparent
                   pl-2 pr-5 py-2 text-xs uppercase hover:bg-indigo-400 
                   cursor-pointer rounded-r-lg shadow-lg`}
-                //   style={{ backgroundColor: currentType === type.name.toLowerCase() ? typesColor[type.name.toLowerCase()] : typesColor[type.name.toLowerCase()]+60 }}
                   style={{ backgroundColor: currentType === type.name.toLowerCase() ? type.color : type.color+60 }}
 
                 key={type.id}
