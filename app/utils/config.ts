@@ -1,6 +1,7 @@
 /** @format */
 
 export const typesColor = {
+  all: "#68A090",
   normal: "#A8A77A",
   fire: "#EE8130",
   water: "#6390F0",

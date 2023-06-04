@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import Filters from "./Filters";
 import PokeCard from "./PokeCard";
 import { useAllPokemonList, useAllTypes } from "@/app/utils/datafetch";
+import GenSideBar from "./filters/GenSideBar";
+import TypeSideBar from "./filters/TypeSideBar";
+import { typeCode } from "@/app/utils/config";
 
 export default function ClientSide() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -85,21 +88,31 @@ export default function ClientSide() {
     setFilteredList(filtered);
   };
 
+
   return (
     <>
-      <Filters
-        handleGenFilter={handleGenFilter}
-        handleTypeFilter={handleTypeFilter}
-        handleSearch={handleSearch}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-      />
+        <div className="md:flex justify-center md:w-[90%] mx-auto">
+          <GenSideBar handleGenFilter={handleGenFilter} />
+          <div className="md:p-4 rounded-lg shadow-lg border-2 border-solid border-gray-400 dark:border-gray-700
+           bg-slate-300 dark:bg-slate-700"
+           >
+            <Filters
+              handleGenFilter={handleGenFilter}
+              handleTypeFilter={handleTypeFilter}
+              handleSearch={handleSearch}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+            />
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {filteredList?.map((pokemon, index) => {
+                return <PokeCard key={index} pokemon={pokemon.name} />;
+              })}
+            </div>
+          </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-        {filteredList?.map((pokemon, index) => {
-          return <PokeCard key={index} pokemon={pokemon.name} />;
-        })}
-      </div>
+          <TypeSideBar handleTypeFilter={handleTypeFilter} />
+
+        </div>
     </>
   );
 }
