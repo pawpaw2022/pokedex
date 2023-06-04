@@ -25,7 +25,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "img.pokemondb.net",
         port: "",
-        pathname: "/sprites/home/normal/**.png",
+        pathname: "/sprites/**/normal/**.png",
       },
       {
         protocol: "https",
