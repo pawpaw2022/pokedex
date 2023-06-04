@@ -1,28 +1,4 @@
 /** @format */
-
-export const typesColor = {
-  normal: "#A8A77A",
-  fire: "#EE8130",
-  water: "#6390F0",
-  electric: "#F7D02C",
-  grass: "#7AC74C",
-  ice: "#96D9D6",
-  fighting: "#C22E28",
-  poison: "#A33EA1",
-  ground: "#E2BF65",
-  flying: "#A98FF3",
-  psychic: "#F95587",
-  bug: "#A6B91A",
-  rock: "#B6A136",
-  ghost: "#735797",
-  dragon: "#6F35FC",
-  dark: "#705746",
-  steel: "#B7B7CE",
-  fairy: "#D685AD",
-  unknown: "#68A090",
-  shadow: "#705746",
-};
-
 export const gens = {
   1: [0, 152],
   2: [152, 252],
@@ -31,30 +7,30 @@ export const gens = {
   5: [494, 650],
   6: [650, 722],
   7: [722, 810],
-  8: [810, 899],
-  9: [899, 1009],
+  8: [810, 906],
+  9: [906, 1009],
 };
 
 export const typeCode = [
-  { name: "All", id: 0 },
-  { name: "Normal", id: 1 },
-  { name: "Fighting", id: 2 },
-  { name: "Flying", id: 3 },
-  { name: "Poison", id: 4 },
-  { name: "Ground", id: 5 },
-  { name: "Rock", id: 6 },
-  { name: "Bug", id: 7 },
-  { name: "Ghost", id: 8 },
-  { name: "Steel", id: 9 },
-  { name: "Fire", id: 10 },
-  { name: "Water", id: 11 },
-  { name: "Grass", id: 12 },
-  { name: "Electric", id: 13 },
-  { name: "Psychic", id: 14 },
-  { name: "Ice", id: 15 },
-  { name: "Dragon", id: 16 },
-  { name: "Dark", id: 17 },
-  { name: "Fairy", id: 18 },
+  { name: "All", id: 0, color: "#68A090", fid: 0 },
+  { name: "Fire", id: 1, color: "#EE8130", fid: 10 },
+  { name: "Water", id: 2, color: "#6390F0", fid: 11},
+  { name: "Grass", id: 3, color: "#7AC74C", fid: 12 },
+  { name: "Electric", id: 4, color: "#F7D02C", fid: 13 },
+  { name: "Normal", id: 5, color: "#A8A77A", fid: 1 },
+  { name: "Rock", id: 6, color: "#B6A136", fid: 6 },
+  { name: "Psychic", id: 7, color: "#F95587", fid: 14 },
+  { name: "Dragon", id: 8, color: "#6F35FC", fid: 16 },
+  { name: "Fighting", id: 9, color: "#C22E28", fid: 2 },
+  { name: "Poison", id: 10, color: "#A33EA1", fid: 4 },
+  { name: "Ground", id: 11, color: "#E2BF65", fid: 5 },
+  { name: "Bug", id: 12, color: "#A6B91A", fid: 7 },
+  { name: "Flying", id: 13, color: "#A98FF3", fid: 3 },
+  { name: "Ghost", id: 14, color: "#735797", fid: 8 },
+  { name: "Ice", id: 15, color: "#96D9D6", fid: 15 },
+  { name: "Steel", id: 16, color: "#B7B7CE", fid: 9 },
+  { name: "Dark", id: 17, color: "#705746", fid: 17 },
+  { name: "Fairy", id: 18, color: "#D685AD", fid: 18 },
 ];
 
 export const imageNameConvention = (name: string) => {
@@ -67,4 +43,4 @@ export const imageNameConvention = (name: string) => {
   }
 
   return name.toLowerCase();
-}
+};

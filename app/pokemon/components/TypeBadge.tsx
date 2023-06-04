@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { typesColor } from "../../utils/config";
+import { typeCode } from "../../utils/config";
 import Image from "next/image";
 
 type Props = {
@@ -9,17 +9,17 @@ type Props = {
 };
 
 export default function TypeBadge({ type }: Props) {
-  const color = typesColor[type];
+  const color = typeCode.find((t) => t.name.toLowerCase() === type)?.color;  
 
   return (
     <span
-      className="rounded-md mx-2 p-2 flex uppercase font-medium min-w-[95px] justify-center items-center text-sm text-gray-600"
+      className="rounded-md mx-2 p-2 flex uppercase text-xs xl:text-sm min-w-[95px] justify-center items-center text-gray-600"
       style={{ backgroundColor: color }}
     >
       <Image 
-      className="mr-2"
+      className="mr-1.5"
       src={`/type-icons/${type}.svg`}
-      alt={'type icon'} width={20} height={20} /> {type}
+      alt={'type icon'} width={18} height={18} /> {type}
     </span>
   );
 }

@@ -17,9 +17,9 @@ type Props = {
 export default function Filters({ handleGenFilter, handleTypeFilter, handleSearch, searchTerm, setSearchTerm}: Props) {
   return (
     <>
-      <div className="flex flex-row justify-center items-center">
-        <GenFilter handleGenFilter={handleGenFilter} />
-        <TypeFilter handleTypeFilter={handleTypeFilter} />
+      <div className="flex flex-row justify-center items-center mb-4">
+        {/* <GenFilter handleGenFilter={handleGenFilter} />
+        <TypeFilter handleTypeFilter={handleTypeFilter} /> */}
         <SearchBar handleSearch={handleSearch} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <DarkModeToggle />
       </div>

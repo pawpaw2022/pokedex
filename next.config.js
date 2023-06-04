@@ -7,6 +7,17 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/pokemon',
+        permanent: true,
+      },
+    ];
+  },
+
   images: {
     remotePatterns: [
       {
@@ -25,7 +36,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "img.pokemondb.net",
         port: "",
-        pathname: "/sprites/home/normal/**.png",
+        pathname: "/sprites/**/normal/**.png",
       },
       {
         protocol: "https",

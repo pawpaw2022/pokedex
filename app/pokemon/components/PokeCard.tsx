@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import TypeBadge from "./TypeBadge";
 import Link from "next/link";
-import { imageNameConvention, typesColor } from "@/app/utils/config";
+import { imageNameConvention, typeCode } from "@/app/utils/config";
 import { usePokemon } from "@/app/utils/datafetch";
 import PokeCardSkeleton from "./PokeCardSkeleton";
 
@@ -19,11 +19,12 @@ export default function PokeCard({ pokemon }: Props) {
 
   const { data, isLoading } = usePokemon(pokemon);
   const bgColor =
-    typesColor[data?.types[0].type.name] + (isHovered ? "80" : "50");
+    typeCode.find((t) => t.name.toLowerCase() === data?.types[0].type.name)
+      ?.color + (isHovered ? "80" : "50");
 
   if (isLoading) return <PokeCardSkeleton />;
 
-  
+  const gen9 = data?.id > 905 && data?.id < 1011;
 
   return (
     <div
@@ -35,7 +36,9 @@ export default function PokeCard({ pokemon }: Props) {
       <Link href={`/pokemon/${data?.name}`}>
         <div className="w-full flex justify-center">
           <Image
-            src={`https://img.pokemondb.net/sprites/home/normal/${imageNameConvention(data?.name)}.png`}
+            src={`https://img.pokemondb.net/sprites/${
+              gen9 ? "scarlet-violet" : "home"
+            }/normal/${imageNameConvention(data?.name)}.png`}
             alt={data?.name}
             height={160}
             width={160}
