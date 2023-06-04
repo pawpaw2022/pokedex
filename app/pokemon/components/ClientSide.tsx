@@ -23,8 +23,8 @@ export default function ClientSide() {
     5: allData?.results.slice(493, 649),
     6: allData?.results.slice(649, 721),
     7: allData?.results.slice(721, 809),
-    8: allData?.results.slice(809, 898),
-    9: allData?.results.slice(898, 1010),
+    8: allData?.results.slice(809, 905),
+    9: allData?.results.slice(905, 1010),
   };
 
   // get all types
