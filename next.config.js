@@ -7,6 +7,17 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/pokemon',
+        permanent: true,
+      },
+    ];
+  },
+
   images: {
     remotePatterns: [
       {

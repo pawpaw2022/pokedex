@@ -68,9 +68,7 @@ export const useAllTypes = () => {
     if (isError) 
       return {data: null, isLoading: false, isError: true};
 
-    const type = typeCode.find((_, j) => j === i);
-    console.log(type);
-    
+    const type = typeCode.find((_, j) => j === i);    
 
     allTypes[type.name] = data;
   }
