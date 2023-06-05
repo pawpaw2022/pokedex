@@ -1,4 +1,5 @@
 /** @format */
+'use client'
 import React from "react";
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
 
 export default function Stats({ name, base_stat }: Props) {
   const progress =
-    name === "total" ? (base_stat / 780) * 100 : (base_stat / 250) * 100;
+    name === "Total" ? (base_stat / 780) * 100 : (base_stat / 250) * 100;
 
   const [width, setWidth] = React.useState(0);
 
@@ -28,18 +29,36 @@ export default function Stats({ name, base_stat }: Props) {
     background: "linear-gradient(90deg, #3b82f6, #60a5fa)",
   };
 
+  const nameConverter = (name: string) => {
+    switch (name) {
+      case "hp":
+        return "HP";
+      case "attack":
+        return "Attack";
+      case "defense":
+        return "Defense";
+      case "special-attack":
+        return "Sp. Atk";
+      case "special-defense":
+      return "Sp. Def";
+      case "speed":
+        return "Speed";
+      default:
+        return name;
+    }
+  };
+
   return (
     <>
       <div className="">
         <p className="">
-          {name}: {base_stat}
+          {nameConverter(name)}: {base_stat}
         </p>
         <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700">
           <div
-            className="text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
+            className="h-2.5 p-0.5 leading-none rounded-full"
             style={style}
           >
-            {base_stat}
           </div>
         </div>
       </div>

@@ -3,6 +3,53 @@
 import { useQuery } from "@tanstack/react-query";
 import { typeCode } from "./config";
 
+export const fetchPokemon = async (id: number | string) => {
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+  const data = await response.json();
+
+  return data as Pokemon;
+};
+
+export const fetchSpecies = async (pokemon: Pokemon) => {
+  const response = await fetch(pokemon.species.url);
+  const data = await response.json();
+
+  return data as PokemonSpecies;
+}
+
+export const fetchEvolutionChain = async (pokemon: Pokemon) => {
+
+  const response = await fetchSpecies(pokemon);
+  const data = await fetch(response.evolution_chain.url);
+  const evolutionChain: EvolutionChain = await data.json();
+
+  
+  const stage1 = evolutionChain.chain.species.name;
+  const stage2 = evolutionChain.chain.evolves_to[0]?.species.name;
+  const stage3 = evolutionChain.chain.evolves_to[0]?.evolves_to[0]?.species.name;
+
+  let results = [];
+
+  if (stage1){
+    const stage1Data = await fetchPokemon(stage1);
+    results.push(stage1Data);
+  }
+
+  if (stage2){
+    const stage2Data = await fetchPokemon(stage2);
+    results.push(stage2Data);
+  }
+
+  if (stage3){
+    const stage3Data = await fetchPokemon(stage3);
+    results.push(stage3Data);
+  }
+
+
+
+  return results;
+}
+
 export const usePokemon = (id: number | string) => {
   const queryFn = async () => {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);

@@ -55,3 +55,16 @@ export const getSpriteUrl = (id: number, name: string) => {
 
   return url;
 }
+
+
+
+export const getPictureUrl = ( name: string) => {
+
+
+  const url = `https://img.pokemondb.net/artwork/large/${imageNameConvention(name)}.jpg`;
+
+  return url;
+}
+
+
+
