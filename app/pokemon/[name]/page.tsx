@@ -1,9 +1,12 @@
 /** @format */
 "use client";
-import {  usePokemon } from "@/app/utils/datafetch";
+import { usePokemon } from "@/app/utils/datafetch";
 import Image from "next/image";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TypeBadge from "../components/TypeBadge";
+import PokeCard from "../components/PokeCard";
+import { getSpriteUrl } from "@/app/utils/config";
+import Stats from './components/Stats';
 
 interface Props {
   params: {
@@ -11,46 +14,54 @@ interface Props {
   };
 }
 
-export default async function PokemonDetail({ params: { name } }: Props) {
+export default async function PokemonDetail({ params }: Props) {
 
-  // const {data: pokemonInfo}: Pokemon = usePokemon(name);
+  const { name } = params;
+  const { data: pokemon, isLoading } = usePokemon(name);
+
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <>
-      {/* <div className="w-full mx-2 text-primary">
-        <Image
-          className="rounded-md shadow-md"
-          src={`https://img.pokemondb.net/artwork/${name}.jpg`}
-          alt="pokemon image"
-          width={400}
-          height={400}
-        />
-        <div>
-          <h1 className="text-2xl font-bold">{pokemon.name}</h1>
-          <p className="text-sm">#{pokemon.id}</p>
-          {pokemon.types.map((type) => {
-            return <TypeBadge key={type.type.name} type={type.type.name} />;
-          })}
+      <div
+        className="md:p-4 md:w-[90%] mx-auto rounded-lg shadow-lg border-2 border-solid border-gray-400 dark:border-gray-700
+           bg-slate-300 dark:bg-slate-700"
+      >
+        <div className="flex justify-center">
+          <div className="mr-15">
+            <Image
+              src={getSpriteUrl(pokemon?.id, pokemon?.name)}
+              alt={pokemon?.name}
+              height={300}
+              width={300}
+            />
+          </div>
 
-          <h1 className="text-2xl font-bold">Abilities</h1>
-          {pokemon.abilities.map((ability) => {
-            return <p key={ability.ability.name}>{ability.ability.name}</p>;
-          })}
+          <main className="">
+            <h1 className="text-lg capitalize">{pokemon?.name}</h1>
+            <p className="text-md">#{pokemon?.id}</p>
+            <div className="flex">
+              {pokemon?.types.map((type) => {
+                return <TypeBadge key={type.slot} type={type.type.name} />;
+              })}
+            </div>
+            <h1 className="text-lg capitalize">Abilities</h1>
+            {pokemon?.abilities.map((ability) => {
+              return <p key={ability.ability.name}>{ability.ability.name}</p>;
+            })}
+            <h1 className="text-lg capitalize">Stats</h1>
+            {pokemon?.stats.map((stat) => {
+              return (
+                <Stats name={stat.stat.name} base_stat={stat.base_stat} key={stat.stat.name} />
+              );
+            })}
+            <Stats name="total" base_stat={pokemon?.stats.reduce((acc, stat) => acc + stat.base_stat, 0)} />
 
-          <h1 className="text-2xl font-bold">Stats</h1>
-          {pokemon.stats.map((stat) => {
-            return (
-              <p key={stat.stat.name}>
-                {stat.stat.name}: {stat.base_stat}
-              </p>
-            );
-          })}
-
-          <h1 className="text-2xl font-bold">Moves</h1>
-          {pokemon.moves.map((move) => {
-            return <p key={move.move.name}>{move.move.name}</p>;
-          })}
+          </main>
         </div>
-      </div> */}
+      </div>
+    
     </>
   );
 }
+

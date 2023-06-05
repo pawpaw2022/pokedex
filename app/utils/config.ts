@@ -33,7 +33,7 @@ export const typeCode = [
   { name: "Fairy", id: 18, color: "#D685AD", fid: 18 },
 ];
 
-export const imageNameConvention = (name: string) => {
+const imageNameConvention = (name: string) => {
   if (name.includes("minior-red-meteor")) {
     return name.replace("-red-meteor", "").toLowerCase();
   }
@@ -44,3 +44,14 @@ export const imageNameConvention = (name: string) => {
 
   return name.toLowerCase();
 };
+
+export const getSpriteUrl = (id: number, name: string) => {
+
+  const gen9 = id > 905 && id < 1011;
+
+  const url = `https://img.pokemondb.net/sprites/${
+    gen9 ? "scarlet-violet" : "home"
+  }/normal/${imageNameConvention(name)}.png`;
+
+  return url;
+}
