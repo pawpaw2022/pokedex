@@ -15,7 +15,7 @@ export const fetchSpecies = async (pokemon: Pokemon) => {
   const data = await response.json();
 
   return data as PokemonSpecies;
-}
+};
 
 export const fetchEvolutionChain = async (pokemon: Pokemon) => {
 
@@ -23,32 +23,63 @@ export const fetchEvolutionChain = async (pokemon: Pokemon) => {
   const data = await fetch(response.evolution_chain.url);
   const evolutionChain: EvolutionChain = await data.json();
 
+  return evolutionChain;
+};
+
+export const fetchEvolutionPokemon = async (evolutionChain: EvolutionChain) => {
+  const chain = evolutionChain.chain;
+
+  let nameList: string[] = [];
+
   
-  const stage1 = evolutionChain.chain.species.name;
-  const stage2 = evolutionChain.chain.evolves_to[0]?.species.name;
-  const stage3 = evolutionChain.chain.evolves_to[0]?.evolves_to[0]?.species.name;
 
-  let results = [];
+  const stage1 = chain.species.name;
 
-  if (stage1){
-    const stage1Data = await fetchPokemon(stage1);
-    results.push(stage1Data);
+  if (stage1.includes('deoxys')){
+    nameList.push('deoxys-normal');
+  }
+  else {
+      nameList.push(stage1);  
   }
 
-  if (stage2){
-    const stage2Data = await fetchPokemon(stage2);
-    results.push(stage2Data);
-  }
+  if (chain.evolves_to.length === 0) return await fetchChainPokemon(nameList);
 
-  if (stage3){
-    const stage3Data = await fetchPokemon(stage3);
-    results.push(stage3Data);
-  }
+  chain.evolves_to.forEach((evolves_to) => {
+    const stage2 = evolves_to.species.name;
+    nameList.push(stage2);
 
+    if (evolves_to.evolves_to) {
+      evolves_to.evolves_to.forEach(async (evolves_to) => {
+        const stage3 = evolves_to.species.name;
+        nameList.push(stage3);
+      });
+    }
+  });
 
+  const results = await fetchChainPokemon(nameList);
 
   return results;
-}
+};
+
+const fetchChainPokemon = async (nameList: string[]) => {
+  const results: Pokemon[] = [];
+
+  for (let i = 0; i < nameList.length; i++) {
+    const pokemon = await fetchPokemon(nameList[i]);
+    results.push(pokemon);
+  }
+  return results;
+};
+
+export const fetchEvolutionCondition = (evolutionChain: EvolutionChain) => {
+  console.log(
+    evolutionChain.chain.evolves_to[0]?.evolution_details[0]?.trigger.name
+  );
+
+  const evolutionCondition: string =
+    evolutionChain.chain.evolution_details[0]?.trigger.name;
+  return evolutionCondition;
+};
 
 export const usePokemon = (id: number | string) => {
   const queryFn = async () => {
@@ -67,10 +98,11 @@ export const usePokemon = (id: number | string) => {
   return { data, isLoading, isError };
 };
 
-
 export const useAllPokemonList = () => {
   const queryFn = async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=2000');
+    const response = await fetch(
+      "https://pokeapi.co/api/v2/pokemon?limit=2000"
+    );
     const data: PokemonList = await response.json();
 
     return data as PokemonList;
@@ -86,7 +118,6 @@ export const useAllPokemonList = () => {
 };
 
 const useType = (code: number) => {
-
   const queryFn = async () => {
     const response = await fetch(`https://pokeapi.co/api/v2/type/${code}`);
     const data = await response.json();
@@ -103,22 +134,19 @@ const useType = (code: number) => {
 };
 
 export const useAllTypes = () => {
-
   const allTypes = {} as AllTypes;
 
   for (let i = 1; i <= 18; i++) {
-
     const fid = typeCode.find((_, j) => j === i).fid;
 
-    const {data, isError} = useType(fid);
+    const { data, isError } = useType(fid);
 
-    if (isError) 
-      return {data: null, isLoading: false, isError: true};
+    if (isError) return { data: null, isLoading: false, isError: true };
 
-    const type = typeCode.find((_, j) => j === i);    
+    const type = typeCode.find((_, j) => j === i);
 
     allTypes[type.name] = data;
   }
 
-  return {data: allTypes, isLoading: false, isError: false};
-}
+  return { data: allTypes, isLoading: false, isError: false };
+};

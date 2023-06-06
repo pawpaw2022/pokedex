@@ -1,15 +1,11 @@
 /** @format */
-import {
-  fetchEvolutionChain,
-  fetchPokemon,
-  usePokemon,
-} from "@/app/utils/datafetch";
+import { fetchEvolutionChain, fetchEvolutionCondition, fetchEvolutionPokemon, fetchPokemon } from "@/app/utils/datafetch";
 import React from "react";
 import BaseInfo from "./components/BaseInfo";
 import StatsChart from "./components/StatsChart";
 import Abilities from "./components/Abilities";
-import Image from "next/image";
-import { getSpriteUrl } from "@/app/utils/config";
+import EvoChain from "./components/EvoChain";
+import Buttons from "./components/Buttons";
 
 interface Props {
   params: {
@@ -20,15 +16,12 @@ interface Props {
 export default async function PokemonDetail({ params }: Props) {
   const { name } = params;
 
+  
   const pokemon = await fetchPokemon(name);
-  const evolutionChain = await fetchEvolutionChain(pokemon);
-
-  const chainName = evolutionChain.map((evolution) => {
-    return {
-      name: evolution.species.name,
-      id: parseInt(evolution.species.url.split("/")[6]),
-    };
-  });
+  const chainData = await fetchEvolutionChain(pokemon);
+  const evolutionChain = await fetchEvolutionPokemon(chainData);
+  const condition = fetchEvolutionCondition(chainData);
+  // console.log(condition);
 
   return (
     <>
@@ -37,24 +30,11 @@ export default async function PokemonDetail({ params }: Props) {
            bg-slate-300 dark:bg-slate-700"
       >
         <div className="flex flex-col justify-center items-center">
+          <Buttons />
           <BaseInfo pokemon={pokemon} />
           <StatsChart pokemon={pokemon} />
+          <EvoChain evolutionChain={evolutionChain} />
           <Abilities pokemon={pokemon} />
-
-          <div>
-            {chainName.map((p) => {
-              return (
-                <div key={p.id}>
-                  <Image
-                    src={getSpriteUrl(p.id, p.name)}
-                    alt={p.name}
-                    height={100}
-                    width={100}
-                  />
-                </div>
-              );
-            })}
-          </div>
         </div>
       </div>
     </>

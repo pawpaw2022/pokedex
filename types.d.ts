@@ -252,15 +252,15 @@ type PokemonSpecies = {
 type EvolutionChain = {
   baby_trigger_item: null;
   chain: {
-    evolution_details: {}
+    evolution_details: {};
     evolves_to: {
-      evolution_details: { }
-      evolves_to: { } 
+      evolution_details: {};
+      evolves_to: any[];
       is_baby: boolean;
       species: {
         name: string;
         url: string;
-      }
+      };
     }[];
     is_baby: boolean;
     species: {
@@ -269,4 +269,14 @@ type EvolutionChain = {
     };
   };
   id: number;
+};
+
+type Evolves_to = {
+  evolution_details: {};
+  evolves_to: {};
+  is_baby: boolean;
+  species: {
+    name: string;
+    url: string;
+  };
 };

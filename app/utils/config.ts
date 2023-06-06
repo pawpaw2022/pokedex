@@ -33,7 +33,7 @@ export const typeCode = [
   { name: "Fairy", id: 18, color: "#D685AD", fid: 18 },
 ];
 
-const imageNameConvention = (name: string) => {
+export const nameConvention = (name: string) => {
   if (name.includes("minior-red-meteor")) {
     return name.replace("-red-meteor", "").toLowerCase();
   }
@@ -41,9 +41,17 @@ const imageNameConvention = (name: string) => {
   if (name.includes("mimikyu-disguised")) {
     return name.replace("-disguised", "").toLowerCase();
   }
-
   return name.toLowerCase();
 };
+
+export const displayName = (name: string) => {
+
+  if (name.includes("-")) {
+    return name.replace("-", " ");
+  }
+
+  return name;
+}
 
 export const getSpriteUrl = (id: number, name: string) => {
 
@@ -51,7 +59,7 @@ export const getSpriteUrl = (id: number, name: string) => {
 
   const url = `https://img.pokemondb.net/sprites/${
     gen9 ? "scarlet-violet" : "home"
-  }/normal/${imageNameConvention(name)}.png`;
+  }/normal/${nameConvention(name)}.png`;
 
   return url;
 }
@@ -61,7 +69,7 @@ export const getSpriteUrl = (id: number, name: string) => {
 export const getPictureUrl = ( name: string) => {
 
 
-  const url = `https://img.pokemondb.net/artwork/large/${imageNameConvention(name)}.jpg`;
+  const url = `https://img.pokemondb.net/artwork/large/${nameConvention(name)}.jpg`;
 
   return url;
 }

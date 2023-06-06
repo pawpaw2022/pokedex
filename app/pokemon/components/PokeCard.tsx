@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import TypeBadge from "./TypeBadge";
 import Link from "next/link";
-import { getSpriteUrl, typeCode } from "@/app/utils/config";
+import { displayName, getSpriteUrl, nameConvention, typeCode } from "@/app/utils/config";
 import { usePokemon } from "@/app/utils/datafetch";
 import PokeCardSkeleton from "./PokeCardSkeleton";
 
@@ -44,7 +44,7 @@ export default function PokeCard({ pokemon }: Props) {
         <div className="flex flex-col items-center justify-center">
           <p className="text-sm text-secondary mt-6">#{data?.id}</p>
           <p className="text-md font-medium capitalize text-primary ">
-            {data?.name}
+          {displayName(data?.name)}
           </p>
           <div className="flex mt-3">
             {data?.types.map((type) => {
