@@ -25,31 +25,47 @@ export const fetchEvolutionChain = async (pokemon: Pokemon) => {
   return evolutionChain;
 };
 
-export const fetchEvolutionPokemon = async (evolutionChain: EvolutionChain) => {
+export const fetchEvolutionPokemon = async (
+  evolutionChain: EvolutionChain,
+) => {
   const chain = evolutionChain.chain;
 
   let nameList: string[] = [];
 
-  const stage1 = chain.species.name;
-  if (stage1.includes("deoxys")) {
-    nameList.push("deoxys-normal");
-  } else {
-    nameList.push(stage1);
-  }
+  const findName = (input: string) => {
+    if (input.includes("pumpkaboo")) {
+      return "pumpkaboo-average";
+    } else if (input.includes("gourgeist")) {
+      return "gourgeist-average";
+    } else if (input.includes("deoxys")) {
+      return "deoxys-normal";
+    } else if (input.includes("keldeo")) {
+      return "keldeo-ordinary";
+    } else if (input.includes("meloetta")) {
+      return "meloetta-aria";
+    }
+    
+    else {
+      return input;
+    }
+  };
+
+  nameList.push(findName(chain.species.name));
 
   if (chain.evolves_to.length === 0) return await fetchChainPokemon(nameList);
 
   chain.evolves_to.forEach((evolves_to) => {
     const stage2 = evolves_to.species.name;
-    nameList.push(stage2);
+    nameList.push(findName(stage2));
 
     if (evolves_to.evolves_to) {
       evolves_to.evolves_to.forEach(async (evolves_to) => {
         const stage3 = evolves_to.species.name;
-        nameList.push(stage3);
+        nameList.push(findName(stage3));
       });
     }
   });
+  
 
   const results = await fetchChainPokemon(nameList);
 
@@ -79,18 +95,20 @@ export const fetchAbilities = async (pokemon: Pokemon) => {
     })
   );
 
-  console.log(data);
-  
-
   const results = data.map((ability) => {
-
-    let effect = ''
+    let effect = "";
     if (ability.effect_entries.find((e) => e.language.name === "en")) {
-      if (ability.effect_entries.find((e) => e.language.name === "en").short_effect){
-        effect = ability.effect_entries.find((e) => e.language.name === "en").short_effect
-      }
-      else {
-        effect = ability.effect_entries.find((e) => e.language.name === "en").effect
+      if (
+        ability.effect_entries.find((e) => e.language.name === "en")
+          .short_effect
+      ) {
+        effect = ability.effect_entries.find(
+          (e) => e.language.name === "en"
+        ).short_effect;
+      } else {
+        effect = ability.effect_entries.find(
+          (e) => e.language.name === "en"
+        ).effect;
       }
     }
 
