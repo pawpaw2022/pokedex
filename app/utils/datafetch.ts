@@ -17,6 +17,13 @@ export const fetchSpecies = async (pokemon: Pokemon) => {
   return data as PokemonSpecies;
 };
 
+export const fetchType = async (url: string) => {
+  const response = await fetch(url);
+  const data = await response.json();
+
+  return data as Type;
+};
+
 export const findVariety = async (pokemon: Pokemon) => {
   const response = await fetchSpecies(pokemon);
 
@@ -113,6 +120,30 @@ export const excludeVariety = (name: string) => {
     !name.includes("-hisui") 
   );
 };
+
+export const findAllFamilyVariety = async(chainData: EvolutionChain) => {
+  const evolutionChain = await fetchEvolutionPokemon(chainData);
+  const chainName = evolutionChain.map((evolution) => {
+    return {
+      name: evolution.species.name,
+      id: parseInt(evolution.species.url.split("/")[6]),
+    };
+  });
+
+  const family = await Promise.all(
+    chainName.map(async (p) => {
+      return await fetchPokemon(p.name);
+    })
+  );
+
+  const varities = await Promise.all(
+    family.map(async (p) => {
+      return await findVariety(p);
+    })
+  );
+
+  return varities;
+}
 
 export const fetchEvolutionPokemon = async (evolutionChain: EvolutionChain) => {
   const chain = evolutionChain.chain;
