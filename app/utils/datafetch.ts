@@ -25,12 +25,11 @@ export const findVariety = async (pokemon: Pokemon) => {
       name: variety.pokemon.name,
       id: parseInt(variety.pokemon.url.split("/")[6]),
       is_default: variety.is_default,
-    }
+    };
   });
 
   return nameList;
-
-}
+};
 
 export const fetchEvolutionChain = async (pokemon: Pokemon) => {
   const response = await fetchSpecies(pokemon);
@@ -98,6 +97,23 @@ export const findName = (input: string) => {
   }
 };
 
+export const excludeVariety = (name: string) => {
+  const list = [
+    "mimikyu-totem-disguised",
+    "mimikyu-totem-busted",
+    "togedemaru-totem",
+  ];
+
+  return (
+    !list.includes(name) &&
+    !name.includes("minior") &&
+    !name.includes("-gmax") &&
+    !name.includes("-alola") &&
+    !name.includes("-galar") &&
+    !name.includes("-hisui") 
+  );
+};
+
 export const fetchEvolutionPokemon = async (evolutionChain: EvolutionChain) => {
   const chain = evolutionChain.chain;
 
@@ -106,9 +122,7 @@ export const fetchEvolutionPokemon = async (evolutionChain: EvolutionChain) => {
   nameList.push(findName(chain.species.name));
 
   if (evolutionChain)
-
-
-  if (chain.evolves_to.length === 0) return await fetchChainPokemon(nameList);
+    if (chain.evolves_to.length === 0) return await fetchChainPokemon(nameList);
 
   chain.evolves_to.forEach((evolves_to) => {
     const stage2 = evolves_to.species.name;

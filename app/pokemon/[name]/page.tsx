@@ -26,10 +26,28 @@ export default async function PokemonDetail({ params }: Props) {
 
   const pokemon = await fetchPokemon(name);
   const chainData = await fetchEvolutionChain(pokemon);
-  const evolutionChain = await fetchEvolutionPokemon(chainData);
   const abilities = await fetchAbilities(pokemon);
-  const varities = await findVariety(pokemon);
-  const moves = fetchMoves(pokemon);  
+  const moves = fetchMoves(pokemon);
+
+  const evolutionChain = await fetchEvolutionPokemon(chainData);
+  const chainName = evolutionChain.map((evolution) => {
+    return {
+      name: evolution.species.name,
+      id: parseInt(evolution.species.url.split("/")[6]),
+    };
+  });
+
+  const family = await Promise.all(
+    chainName.map(async (p) => {
+      return await fetchPokemon(p.name);
+    })
+  );
+
+  const varities = await Promise.all(
+    family.map(async (p) => {
+      return await findVariety(p);
+    })
+  );
 
   return (
     <>
@@ -38,11 +56,11 @@ export default async function PokemonDetail({ params }: Props) {
            bg-slate-300 dark:bg-slate-700"
       >
         <div className="flex flex-col justify-center items-center">
-          <Buttons pokemon={pokemon}/>
+          <Buttons pokemon={pokemon} />
           <BaseInfo pokemon={pokemon} />
           <StatsChart pokemon={pokemon} />
           <div className="w-[80%] lg:w-[50%]">
-            <EvoChain evolutionChain={evolutionChain} varities={varities} />
+            <EvoChain varities={varities} />
             <Abilities abilities={abilities} />
             <Moves moves={moves} />
           </div>

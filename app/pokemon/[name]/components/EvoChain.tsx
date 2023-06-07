@@ -1,41 +1,32 @@
 /** @format */
 
 import { getSpriteUrl } from "@/app/utils/config";
-import { findName, findVariety } from "@/app/utils/datafetch";
+import { excludeVariety, findName, findVariety } from "@/app/utils/datafetch";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 type Props = {
-  evolutionChain: Pokemon[];
   varities: {
     name: string;
     id: number;
     is_default: boolean;
-  }[];  
+  }[][];
 };
 
-export default function EvoChain({ evolutionChain, varities }: Props) {
+export default function EvoChain({ varities }: Props) {
+  const chainName: { name: string; id: number }[] = [];
 
-
-  let chainName = evolutionChain.map((evolution) => {
-    return {
-      name: evolution.species.name,
-      id: parseInt(evolution.species.url.split("/")[6]),
-    };
-  });
-
-  if (varities.length > 1) {
-    varities.forEach((variety) => {
-        if (!variety.is_default) {
-            chainName.push({
-                name: variety.name,
-                id: variety.id
-            })
-        }
+  varities.forEach((variety) => {
+    variety.forEach((v) => {
+      if (excludeVariety(v.name)) {
+        chainName.push({
+          name: v.name,
+          id: v.id,
+        });
+      }
     });
-  }
-
+  });
 
   return (
     <div className=" mt-6 ">
