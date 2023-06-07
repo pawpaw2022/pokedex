@@ -1,5 +1,11 @@
 /** @format */
-import { fetchAbilities, fetchEvolutionChain, fetchEvolutionPokemon, fetchMoves, fetchPokemon } from "@/app/utils/datafetch";
+import {
+  fetchAbilities,
+  fetchEvolutionChain,
+  fetchEvolutionPokemon,
+  fetchMoves,
+  fetchPokemon,
+} from "@/app/utils/datafetch";
 import React from "react";
 import BaseInfo from "./components/BaseInfo";
 import StatsChart from "./components/StatsChart";
@@ -7,7 +13,6 @@ import Abilities from "./components/Abilities";
 import EvoChain from "./components/EvoChain";
 import Buttons from "./components/Buttons";
 import Moves from "./components/Moves";
-import MoveSkeleton from "./components/widgets/MoveSkeleton";
 
 interface Props {
   params: {
@@ -18,13 +23,12 @@ interface Props {
 export default async function PokemonDetail({ params }: Props) {
   const { name } = params;
 
-  
   const pokemon = await fetchPokemon(name);
   const chainData = await fetchEvolutionChain(pokemon);
   const evolutionChain = await fetchEvolutionPokemon(chainData);
   const abilities = await fetchAbilities(pokemon);
   const moves = fetchMoves(pokemon);
-  
+
 
   return (
     <>
