@@ -3,15 +3,16 @@
 import React, { useState } from "react";
 import Filters from "./Filters";
 import PokeCard from "./PokeCard";
-import { useAllPokemonList, useAllTypes } from "@/app/utils/datafetch";
+import { useAllPokemonList } from "@/app/utils/datafetch";
 import GenSideBar from "./filters/GenSideBar";
 import TypeSideBar from "./filters/TypeSideBar";
 
 type Prop = {
   gen: number;
+  allTypes: any;
 };
 
-export default function ClientSide( {gen}: Prop ) {
+export default function ClientSide( {gen, allTypes}: Prop ) {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [currentGenFilter, setCurrentGenFilter] = useState(gen);
@@ -31,8 +32,7 @@ export default function ClientSide( {gen}: Prop ) {
     9: allData?.results.slice(905, 1010),
   };
 
-  // get all types
-  const { data: allTypes } = useAllTypes();
+
 
   const currentList: CurrentList = pokemonGenList[currentGenFilter];
   const [filteredList, setFilteredList] = useState<CurrentList>([]);

@@ -374,15 +374,14 @@ const getType = (code: number) => {
   return { data, isLoading, isError };
 };
 
-export const useAllTypes = () => {
+export const useAllTypes = async() => {
   const allTypes = {} as AllTypes;
 
   for (let i = 1; i <= 18; i++) {
     const fid = typeCode.find((_, j) => j === i).fid;
 
-    const { data, isError } = getType(fid);
-
-    if (isError) return { data: null, isLoading: false, isError: true };
+    const response = await fetch(`https://pokeapi.co/api/v2/type/${fid}`)
+    const data = await response.json();
 
     const type = typeCode.find((_, j) => j === i);
 
@@ -391,5 +390,5 @@ export const useAllTypes = () => {
 
 
 
-  return { data: allTypes, isLoading: false, isError: false };
+  return  allTypes;
 };
