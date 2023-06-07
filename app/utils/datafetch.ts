@@ -358,22 +358,6 @@ export const useAllPokemonList = () => {
   return { data, isLoading, isError };
 };
 
-const getType = (code: number) => {
-  const queryFn = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/type/${code}`);
-    const data = await response.json();
-    return data as Type;
-  };
-  const typeName = typeCode.find((_, i) => i === code);
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["pokemonType", typeName.name],
-    queryFn,
-    staleTime: 1000 * 60 * 60 * 24 * 7, // 1 week
-  });
-
-  return { data, isLoading, isError };
-};
-
 export const useAllTypes = async() => {
   const allTypes = {} as AllTypes;
 

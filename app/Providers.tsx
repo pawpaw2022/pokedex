@@ -13,7 +13,7 @@ export default function Providers({ children }: { children: ReactNode }) {
     <ThemeProvider attribute="class">
       <QueryClientProvider client={new QueryClient()}>
         {children}
-        <ReactQueryDevtools />
+        {/* <ReactQueryDevtools /> */}
       </QueryClientProvider>
     </ThemeProvider>
   );
