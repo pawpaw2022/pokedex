@@ -6,7 +6,6 @@ import PokeCard from "./PokeCard";
 import { useAllPokemonList, useAllTypes } from "@/app/utils/datafetch";
 import GenSideBar from "./filters/GenSideBar";
 import TypeSideBar from "./filters/TypeSideBar";
-import { typeCode } from "@/app/utils/config";
 
 export default function ClientSide() {
   const [searchTerm, setSearchTerm] = useState("");

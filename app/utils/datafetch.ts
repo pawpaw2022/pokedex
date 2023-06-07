@@ -18,7 +18,6 @@ export const fetchSpecies = async (pokemon: Pokemon) => {
 };
 
 export const fetchEvolutionChain = async (pokemon: Pokemon) => {
-
   const response = await fetchSpecies(pokemon);
   const data = await fetch(response.evolution_chain.url);
   const evolutionChain: EvolutionChain = await data.json();
@@ -31,15 +30,11 @@ export const fetchEvolutionPokemon = async (evolutionChain: EvolutionChain) => {
 
   let nameList: string[] = [];
 
-  
-
   const stage1 = chain.species.name;
-
-  if (stage1.includes('deoxys')){
-    nameList.push('deoxys-normal');
-  }
-  else {
-      nameList.push(stage1);  
+  if (stage1.includes("deoxys")) {
+    nameList.push("deoxys-normal");
+  } else {
+    nameList.push(stage1);
   }
 
   if (chain.evolves_to.length === 0) return await fetchChainPokemon(nameList);
@@ -71,14 +66,29 @@ const fetchChainPokemon = async (nameList: string[]) => {
   return results;
 };
 
-export const fetchEvolutionCondition = (evolutionChain: EvolutionChain) => {
-  console.log(
-    evolutionChain.chain.evolves_to[0]?.evolution_details[0]?.trigger.name
+export const fetchAbilities = async (pokemon: Pokemon) => {
+  const abilities = pokemon.abilities.map((ability) => {
+    return ability.ability.url;
+  });
+
+  const data = await Promise.all(
+    abilities.map(async (url) => {
+      const response = await fetch(url);
+      const data: Ability = await response.json();
+      return data;
+    })
   );
 
-  const evolutionCondition: string =
-    evolutionChain.chain.evolution_details[0]?.trigger.name;
-  return evolutionCondition;
+  const results = data.map((ability) => {
+    return {
+      name: ability.name,
+      effect: ability.effect_entries.find((e) => e.language.name === "en")
+        .short_effect,
+      hidden: pokemon.abilities.find((a) => a.ability.name === ability.name)
+        .is_hidden,
+    };
+  });
+  return results;
 };
 
 export const usePokemon = (id: number | string) => {

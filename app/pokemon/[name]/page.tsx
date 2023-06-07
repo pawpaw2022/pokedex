@@ -1,5 +1,5 @@
 /** @format */
-import { fetchEvolutionChain, fetchEvolutionCondition, fetchEvolutionPokemon, fetchPokemon } from "@/app/utils/datafetch";
+import { fetchAbilities, fetchEvolutionChain, fetchEvolutionPokemon, fetchPokemon } from "@/app/utils/datafetch";
 import React from "react";
 import BaseInfo from "./components/BaseInfo";
 import StatsChart from "./components/StatsChart";
@@ -20,21 +20,22 @@ export default async function PokemonDetail({ params }: Props) {
   const pokemon = await fetchPokemon(name);
   const chainData = await fetchEvolutionChain(pokemon);
   const evolutionChain = await fetchEvolutionPokemon(chainData);
-  const condition = fetchEvolutionCondition(chainData);
-  // console.log(condition);
+  const abilities = await fetchAbilities(pokemon);
 
   return (
     <>
       <div
-        className="md:p-4 md:w-[90%] mx-auto rounded-lg shadow-lg border-2 border-solid border-gray-400 dark:border-gray-700
+        className="md:p-4 md:w-[90%] lg:w-[75%] mx-auto rounded-lg shadow-lg border-2 border-solid border-gray-400 dark:border-gray-700
            bg-slate-300 dark:bg-slate-700"
       >
         <div className="flex flex-col justify-center items-center">
           <Buttons />
           <BaseInfo pokemon={pokemon} />
           <StatsChart pokemon={pokemon} />
-          <EvoChain evolutionChain={evolutionChain} />
-          <Abilities pokemon={pokemon} />
+          <div className="w-[80%] lg:w-[50%]">
+            <EvoChain evolutionChain={evolutionChain} />
+            <Abilities abilities={abilities} />
+          </div>
         </div>
       </div>
     </>
