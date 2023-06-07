@@ -93,7 +93,7 @@ export default function ClientSide( {gen}: Prop ) {
   };
 
   const handleScroll = () => {
-    if (localStorage && localStorage.getItem("scroll")) {
+    if (typeof window !== 'undefined' && localStorage && localStorage.getItem("scroll")) {
       const scroll = localStorage.getItem("scroll")
       window.scrollTo(0, parseInt(scroll));
       localStorage.removeItem("scroll");

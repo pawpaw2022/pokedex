@@ -6,7 +6,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 import TypeBadge from "./TypeBadge";
 import Link from "next/link";
-import { displayName, getSpriteUrl, nameConvention, typeCode } from "@/app/utils/config";
+import {
+  displayName,
+  getSpriteUrl,
+  nameConvention,
+  typeCode,
+} from "@/app/utils/config";
 import { usePokemon } from "@/app/utils/datafetch";
 import PokeCardSkeleton from "./PokeCardSkeleton";
 
@@ -24,8 +29,10 @@ export default function PokeCard({ pokemon }: Props) {
 
   const handleClick = () => {
     const postion = (document.documentElement || document.body).scrollTop;
-    localStorage.setItem("scroll", postion.toString());    
-  }
+    if (typeof window !== "undefined" && localStorage) {
+      localStorage.setItem("scroll", postion.toString());
+    }
+  };
 
   if (isLoading) return <PokeCardSkeleton />;
 
@@ -51,7 +58,7 @@ export default function PokeCard({ pokemon }: Props) {
         <div className="flex flex-col items-center justify-center">
           <p className="text-sm text-secondary mt-6">#{data?.id}</p>
           <p className="text-md font-medium capitalize text-primary ">
-          {displayName(data?.name)}
+            {displayName(data?.name)}
           </p>
           <div className="flex mt-3">
             {data?.types.map((type) => {
