@@ -106,7 +106,7 @@ export default async function PokemonDetail({ params }: Props) {
   return (
     <>
       <div
-        className="md:p-4 md:w-[90%] lg:w-[75%] mx-auto rounded-lg shadow-lg border-2 border-solid border-gray-400 dark:border-gray-700
+        className="md:p-4 md:w-[90%]  mx-auto rounded-lg shadow-lg border-2 border-solid border-gray-400 dark:border-gray-700
            bg-slate-300 dark:bg-slate-700"
       >
         <div className="flex flex-col justify-center items-center">

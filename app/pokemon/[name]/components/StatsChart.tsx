@@ -21,7 +21,7 @@ export default function StatsChart({ pokemon }: Props) {
         }`}
       >
         <AiFillBackward
-          className="cursor-pointer hover:-translate-x-2 ease-in-out duration-200 lg:mr-5 text-indigo-500 dark:text-indigo-600"
+          className="cursor-pointer hover:-translate-x-2 ease-in-out duration-200 lg:mr-5 text-indigo-500 dark:text-indigo-600 w-12 md:w-[100px] "
           size={100}
         />
       </Link>
@@ -62,7 +62,7 @@ export default function StatsChart({ pokemon }: Props) {
         }`}
       >
         <AiFillForward
-          className="cursor-pointer hover:translate-x-2 ease-in-out duration-200 lg:ml-5 text-indigo-500 dark:text-indigo-600"
+          className="cursor-pointer hover:translate-x-2 ease-in-out duration-200 lg:ml-5 text-indigo-500 dark:text-indigo-600  w-12 md:w-[100px]"
           size={100}
         />
       </Link>

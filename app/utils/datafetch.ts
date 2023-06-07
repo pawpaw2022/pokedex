@@ -117,7 +117,10 @@ export const excludeVariety = (name: string) => {
     !name.includes("-gmax") &&
     !name.includes("-alola") &&
     !name.includes("-galar") &&
-    !name.includes("-hisui") 
+    !name.includes("-hisui") &&
+    !name.includes("-eternamax") &&
+    !name.includes("pikachu-") &&
+    !name.includes("-starter") 
   );
 };
 
