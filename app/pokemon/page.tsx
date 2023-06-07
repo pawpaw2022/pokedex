@@ -4,11 +4,21 @@ import PokeCard from "./components/PokeCard";
 import Filters from "./components/Filters";
 import ClientSide from "./components/ClientSide";
 
-export default async function Pokemon() {
 
+// get search query parameter
+type Props = {
+  searchParams: {
+    gen: string;
+  };
+};
+
+export default async function Pokemon({ searchParams }: Props) {
+
+  const { gen } = searchParams;
+  
   return (
     <>
-      <ClientSide/>
+      <ClientSide gen={gen ? Number(gen) : 1}/>
     </>
   );
 }

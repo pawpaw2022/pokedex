@@ -7,9 +7,14 @@ import { useAllPokemonList, useAllTypes } from "@/app/utils/datafetch";
 import GenSideBar from "./filters/GenSideBar";
 import TypeSideBar from "./filters/TypeSideBar";
 
-export default function ClientSide() {
+type Prop = {
+  gen: number;
+};
+
+export default function ClientSide( {gen}: Prop ) {
+
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentGenFilter, setCurrentGenFilter] = useState(1);
+  const [currentGenFilter, setCurrentGenFilter] = useState(gen);
   const [currentTypeFilter, setCurrentTypeFilter] = useState("all");
 
   // get all pokemon data
@@ -87,10 +92,11 @@ export default function ClientSide() {
     setFilteredList(filtered);
   };
 
+
   return (
     <>
       <div className="md:flex justify-center md:w-[90%] mx-auto">
-        <GenSideBar handleGenFilter={handleGenFilter} />
+        <GenSideBar handleGenFilter={handleGenFilter} currentGenFilter={currentGenFilter} setCurrentGenFilter={setCurrentGenFilter} />
         <div
           className="md:p-4 rounded-lg shadow-lg border-2 border-solid border-gray-400 dark:border-gray-700
            bg-slate-300 dark:bg-slate-700"
@@ -114,7 +120,7 @@ export default function ClientSide() {
             )}
         </div>
 
-        <TypeSideBar handleTypeFilter={handleTypeFilter} />
+        <TypeSideBar handleTypeFilter={handleTypeFilter} currentTypeFilter={currentTypeFilter} setCurrentTypeFilter={setCurrentTypeFilter} />
       </div>
     </>
   );

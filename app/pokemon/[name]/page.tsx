@@ -37,7 +37,7 @@ export default async function PokemonDetail({ params }: Props) {
            bg-slate-300 dark:bg-slate-700"
       >
         <div className="flex flex-col justify-center items-center">
-          <Buttons />
+          <Buttons pokemon={pokemon}/>
           <BaseInfo pokemon={pokemon} />
           <StatsChart pokemon={pokemon} />
           <div className="w-[80%] lg:w-[50%]">

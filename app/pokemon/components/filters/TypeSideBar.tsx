@@ -7,13 +7,14 @@ import TypeSideBarTicket from "./TypeSideBarTicket";
 
 type Props = {
   handleTypeFilter: (type: string) => void;
+  currentTypeFilter: string;
+  setCurrentTypeFilter: (type: string) => void;
 };
 
-export default function TypeSideBar({ handleTypeFilter }: Props) {
-  const [currentType, setCurrentType] = React.useState<string>("all");
+export default function TypeSideBar({ handleTypeFilter, currentTypeFilter, setCurrentTypeFilter }: Props) {
 
   const handleClick = (type: string) => {
-    setCurrentType(type.toLowerCase());
+    setCurrentTypeFilter(type.toLowerCase());
     handleTypeFilter(type);
   };
 
@@ -27,7 +28,7 @@ export default function TypeSideBar({ handleTypeFilter }: Props) {
                 type={t}
                 handleClick={handleClick}
                 key={t.id}
-                currentType={currentType}
+                currentType={currentTypeFilter}
               />
             );
           })}

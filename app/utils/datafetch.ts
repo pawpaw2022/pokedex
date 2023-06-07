@@ -79,11 +79,24 @@ export const fetchAbilities = async (pokemon: Pokemon) => {
     })
   );
 
+  console.log(data);
+  
+
   const results = data.map((ability) => {
+
+    let effect = ''
+    if (ability.effect_entries.find((e) => e.language.name === "en")) {
+      if (ability.effect_entries.find((e) => e.language.name === "en").short_effect){
+        effect = ability.effect_entries.find((e) => e.language.name === "en").short_effect
+      }
+      else {
+        effect = ability.effect_entries.find((e) => e.language.name === "en").effect
+      }
+    }
+
     return {
       name: ability.name,
-      effect: ability.effect_entries.find((e) => e.language.name === "en")
-        .short_effect,
+      effect: effect,
       hidden: pokemon.abilities.find((a) => a.ability.name === ability.name)
         .is_hidden,
     };

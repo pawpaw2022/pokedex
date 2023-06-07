@@ -33,7 +33,7 @@ export default function TypeSideBarTicket({
       cursor-pointer rounded-r-lg shadow-lg ease-linear transition-all duration-150`}
       style={{
         backgroundColor:
-          isHover || type.name.toLowerCase() === currentType
+          isHover || type.name.toLowerCase() === currentType.toLowerCase()
             ? type.color
             : "#B9D5FF80",
       }}

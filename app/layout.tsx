@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <ServerThemeProvider attribute="class">
-      <html lang="en">
+      <html lang="en" style={{scrollBehavior:'smooth'}}>
         <body>
           <Providers>
             <main className="bg-color w-full h-full min-h-screen py-6">

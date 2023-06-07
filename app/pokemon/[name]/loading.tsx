@@ -1,6 +1,5 @@
 import React from "react";
 import MoveSkeleton from "./components/widgets/MoveSkeleton";
-import Buttons from "./components/Buttons";
 
 export default function loading() {
 
@@ -11,7 +10,6 @@ export default function loading() {
                bg-slate-300 dark:bg-slate-700"
           >
             <div className="flex flex-col justify-center items-center">
-              <Buttons />
               <div className="animate-pulse w-full md:w-[80%] flex flex-col justify-center items-center">
                 <div className="mt-5 h-4 bg-gray-700 rounded-full dark:bg-gray-300 w-48 mb-4"></div>
                 <div className="h-4 bg-gray-700 rounded-full dark:bg-gray-300 w-48 mb-4"></div>

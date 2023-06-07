@@ -26,6 +26,7 @@ export default function PokeCard({ pokemon }: Props) {
 
   return (
     <div
+      id={data?.name}
       className="card"
       style={{ backgroundColor: bgColor }}
       onMouseEnter={() => setIsHovered(true)}
