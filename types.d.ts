@@ -337,3 +337,144 @@ type Ability = {
     slot: number;
   }[];
 };
+
+type Move = {
+  accuracy: number;
+  contest_combos: {
+    normal: {
+      use_after: {
+        name: string;
+        url: string;
+      }[];
+      use_before: {
+        name: string;
+        url: string;
+      }[];
+    };
+    super: {
+      use_after: {
+        name: string;
+        url: string;
+      }[];
+      use_before: {
+        name: string;
+        url: string;
+      }[];
+    };
+  };
+  contest_effect: {
+    url: string;
+  };
+  contest_type: {
+    name: string;
+    url: string;
+  };
+  damage_class: {
+    name: string;
+    url: string;
+  };
+  effect_chance: any;
+  effect_changes: {
+    effect_entries: {
+      effect: string;
+      language: {
+        name: string;
+        url: string;
+      };
+    }[];
+    version_group: {
+      name: string;
+      url: string;
+    };
+  }[];
+  effect_entries: {
+    effect: string;
+    language: {
+      name: string;
+      url: string;
+    };
+    short_effect: string;
+  }[];
+  flavor_text_entries: {
+    flavor_text: string;
+    language: {
+      name: string;
+      url: string;
+    };
+    version_group: {
+      name: string;
+      url: string;
+    };
+  }[];
+  generation: {
+    name: string;
+    url: string;
+  };
+  id: number;
+  learned_by_pokemon: {
+    name: string;
+    url: string;
+  }[];
+  machines: {
+    machine: {
+      name: string;
+      url: string;
+    };
+    version_group: {
+      name: string;
+      url: string;
+    };
+  }[];
+  meta: {
+    ailment: {
+      name: string;
+      url: string;
+    };
+    ailment_chance: number;
+    category: {
+      name: string;
+      url: string;
+    };
+    crit_rate: number;
+    drain: number;
+    flinch_chance: number;
+    healing: number;
+    max_hits: null;
+    max_turns: null;
+    min_hits: null;
+    min_turns: null;
+    stat_chance: number;
+  };
+  name: string;
+  names: {
+    language: {
+      name: string;
+      url: string;
+    };
+    name: string;
+  }[];
+  past_values: any[];
+  power: number;
+  pp: number;
+  priority: number;
+  stat_changes: {
+    change: number;
+    stat: {
+      name: string;
+      url: string;
+    };
+  }[];
+  super_contest_effect: {
+    url: string;
+  };
+  target: {
+    name: string;
+    url: string;
+  };
+  type: {
+    name: string;
+    url: string;
+  };
+};
+
+

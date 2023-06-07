@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react'
-import Stats from './Stats';
+import Stats from './widgets/Stats';
 import { getPictureUrl } from '@/app/utils/config';
 
 type Props = {

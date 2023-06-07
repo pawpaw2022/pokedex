@@ -91,6 +91,34 @@ export const fetchAbilities = async (pokemon: Pokemon) => {
   return results;
 };
 
+export const fetchMoves = (pokemon: Pokemon) => {
+  const moves = pokemon.moves.map((move) => {
+    return {
+      name: move.move.name,
+      url: move.move.url,
+    };
+  });
+
+  return moves;
+};
+
+export const useSingleMove = (move: { name: string; url: string }) => {
+  const queryFn = async () => {
+    const response = await fetch(move.url);
+    const data: Move = await response.json();
+
+    return data as Move;
+  };
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["move", move.name],
+    queryFn,
+    staleTime: 1000 * 60 * 60 * 24 * 7, // 1 week
+  });
+
+  return { data, isLoading, isError };
+};
+
 export const usePokemon = (id: number | string) => {
   const queryFn = async () => {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
