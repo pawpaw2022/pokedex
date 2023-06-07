@@ -22,6 +22,11 @@ export default function PokeCard({ pokemon }: Props) {
     typeCode.find((t) => t.name.toLowerCase() === data?.types[0].type.name)
       ?.color + (isHovered ? "80" : "50");
 
+  const handleClick = () => {
+    const postion = (document.documentElement || document.body).scrollTop;
+    localStorage.setItem("scroll", postion.toString());    
+  }
+
   if (isLoading) return <PokeCardSkeleton />;
 
   return (
@@ -31,6 +36,7 @@ export default function PokeCard({ pokemon }: Props) {
       style={{ backgroundColor: bgColor }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick}
     >
       <Link href={`/pokemon/${data?.name}`}>
         <div className="w-full flex justify-center">
