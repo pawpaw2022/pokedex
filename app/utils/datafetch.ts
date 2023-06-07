@@ -17,6 +17,21 @@ export const fetchSpecies = async (pokemon: Pokemon) => {
   return data as PokemonSpecies;
 };
 
+export const findVariety = async (pokemon: Pokemon) => {
+  const response = await fetchSpecies(pokemon);
+
+  const nameList = response.varieties.map((variety) => {
+    return {
+      name: variety.pokemon.name,
+      id: parseInt(variety.pokemon.url.split("/")[6]),
+      is_default: variety.is_default,
+    }
+  });
+
+  return nameList;
+
+}
+
 export const fetchEvolutionChain = async (pokemon: Pokemon) => {
   const response = await fetchSpecies(pokemon);
   const data = await fetch(response.evolution_chain.url);
@@ -25,32 +40,73 @@ export const fetchEvolutionChain = async (pokemon: Pokemon) => {
   return evolutionChain;
 };
 
-export const fetchEvolutionPokemon = async (
-  evolutionChain: EvolutionChain,
-) => {
+export const findName = (input: string) => {
+  if (input.includes("pumpkaboo")) {
+    return "pumpkaboo-average";
+  } else if (input.includes("gourgeist")) {
+    return "gourgeist-average";
+  } else if (input.includes("deoxys")) {
+    return "deoxys-normal";
+  } else if (input.includes("keldeo")) {
+    return "keldeo-ordinary";
+  } else if (input.includes("meloetta")) {
+    return "meloetta-aria";
+  } else if (input.includes("thundurus")) {
+    return "thundurus-incarnate";
+  } else if (input.includes("tornadus")) {
+    return "tornadus-incarnate";
+  } else if (input.includes("enamorus")) {
+    return "landorus-incarnate";
+  } else if (input.includes("landorus")) {
+    return "landorus-incarnate";
+  } else if (input.includes("zygarde")) {
+    return "zygarde-50";
+  } else if (input.includes("minior")) {
+    return "minior-red-meteor";
+  } else if (input.includes("mimikyu")) {
+    return "mimikyu-disguised";
+  } else if (input.includes("eiscue")) {
+    return "eiscue-ice";
+  } else if (input.includes("indeedee")) {
+    return "indeedee-male";
+  } else if (input.includes("morpeko")) {
+    return "morpeko-full-belly";
+  } else if (input.includes("urshifu")) {
+    return "urshifu-single-strike";
+  } else if (input.includes("giratina")) {
+    return "giratina-altered";
+  } else if (input.includes("shaymin")) {
+    return "shaymin-land";
+  } else if (input.includes("wormadam")) {
+    return "wormadam-plant";
+  } else if (input.includes("basculin")) {
+    return "basculin-red-striped";
+  } else if (input.includes("darmanitan")) {
+    return "darmanitan-standard";
+  } else if (input.includes("basculegion")) {
+    return "basculegion-male";
+  } else if (input.includes("basculin")) {
+    return "basculin-red-striped";
+  } else if (input.includes("meowstic")) {
+    return "meowstic-male";
+  } else if (input.includes("wishiwashi")) {
+    return "wishiwashi-solo";
+  } else if (input.includes("toxtricity")) {
+    return "toxtricity-amped";
+  } else {
+    return input;
+  }
+};
+
+export const fetchEvolutionPokemon = async (evolutionChain: EvolutionChain) => {
   const chain = evolutionChain.chain;
 
   let nameList: string[] = [];
 
-  const findName = (input: string) => {
-    if (input.includes("pumpkaboo")) {
-      return "pumpkaboo-average";
-    } else if (input.includes("gourgeist")) {
-      return "gourgeist-average";
-    } else if (input.includes("deoxys")) {
-      return "deoxys-normal";
-    } else if (input.includes("keldeo")) {
-      return "keldeo-ordinary";
-    } else if (input.includes("meloetta")) {
-      return "meloetta-aria";
-    }
-    
-    else {
-      return input;
-    }
-  };
-
   nameList.push(findName(chain.species.name));
+
+  if (evolutionChain)
+
 
   if (chain.evolves_to.length === 0) return await fetchChainPokemon(nameList);
 
@@ -65,7 +121,6 @@ export const fetchEvolutionPokemon = async (
       });
     }
   });
-  
 
   const results = await fetchChainPokemon(nameList);
 

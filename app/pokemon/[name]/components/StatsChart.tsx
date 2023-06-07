@@ -15,17 +15,17 @@ export default function StatsChart({ pokemon }: Props) {
   return (
     <div className="flex justify-center items-center md:w-[80%]">
       <Link
-        href={
-          pokemon.id - 1 >= 1
-            ? `/pokemon/${pokemon.id - 1}`
-            : `/pokemon/${pokemon.id}`
-        }
+        href={`/pokemon/${pokemon.id - 1}`}
+        className={`${
+          pokemon.id > 1 && pokemon.id < 1011 ? "visible" : "invisible"
+        }`}
       >
         <AiFillBackward
           className="cursor-pointer hover:-translate-x-2 ease-in-out duration-200 lg:mr-5 text-indigo-500 dark:text-indigo-600"
           size={100}
         />
       </Link>
+
       <div className="flex">
         <div className="mr-5">
           <Image
@@ -56,11 +56,10 @@ export default function StatsChart({ pokemon }: Props) {
       </div>
 
       <Link
-        href={
-          pokemon.id + 1 <= 1010
-            ? `/pokemon/${pokemon.id + 1}`
-            : `/pokemon/${pokemon.id}`
-        }
+        href={`/pokemon/${pokemon.id + 1}`}
+        className={`${
+          pokemon.id > 0 && pokemon.id < 1010 ? "visible" : "invisible"
+        }`}
       >
         <AiFillForward
           className="cursor-pointer hover:translate-x-2 ease-in-out duration-200 lg:ml-5 text-indigo-500 dark:text-indigo-600"

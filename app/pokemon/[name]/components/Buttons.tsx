@@ -20,6 +20,7 @@ export default function Buttons( {pokemon }: Props ) {
     if (id <= 809) return 7;
     if (id <= 905) return 8;
     if (id <= 1010) return 9;
+    return 1;
   };
 
   const gen = getPokemonGen(pokemon.id);

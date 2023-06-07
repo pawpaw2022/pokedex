@@ -5,6 +5,7 @@ import {
   fetchEvolutionPokemon,
   fetchMoves,
   fetchPokemon,
+  findVariety,
 } from "@/app/utils/datafetch";
 import React from "react";
 import BaseInfo from "./components/BaseInfo";
@@ -13,7 +14,6 @@ import Abilities from "./components/Abilities";
 import EvoChain from "./components/EvoChain";
 import Buttons from "./components/Buttons";
 import Moves from "./components/Moves";
-import { AiFillBackward, AiFillForward } from "react-icons/ai";
 
 interface Props {
   params: {
@@ -28,8 +28,8 @@ export default async function PokemonDetail({ params }: Props) {
   const chainData = await fetchEvolutionChain(pokemon);
   const evolutionChain = await fetchEvolutionPokemon(chainData);
   const abilities = await fetchAbilities(pokemon);
-  const moves = fetchMoves(pokemon);
-
+  const varities = await findVariety(pokemon);
+  const moves = fetchMoves(pokemon);  
 
   return (
     <>
@@ -42,7 +42,7 @@ export default async function PokemonDetail({ params }: Props) {
           <BaseInfo pokemon={pokemon} />
           <StatsChart pokemon={pokemon} />
           <div className="w-[80%] lg:w-[50%]">
-            <EvoChain evolutionChain={evolutionChain} />
+            <EvoChain evolutionChain={evolutionChain} varities={varities} />
             <Abilities abilities={abilities} />
             <Moves moves={moves} />
           </div>
