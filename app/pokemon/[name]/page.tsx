@@ -13,6 +13,7 @@ import Abilities from "./components/Abilities";
 import EvoChain from "./components/EvoChain";
 import Buttons from "./components/Buttons";
 import Moves from "./components/Moves";
+import { AiFillBackward, AiFillForward } from "react-icons/ai";
 
 interface Props {
   params: {

@@ -54,7 +54,7 @@ export default function Stats({ name, base_stat }: Props) {
         <p className="">
           {nameConverter(name)}: {base_stat}
         </p>
-        <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+        <div className="w-full bg-gray-200 rounded-full dark:bg-gray-500">
           <div
             className="h-2.5 p-0.5 leading-none rounded-full"
             style={style}

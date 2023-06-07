@@ -17,9 +17,10 @@ import PokeCardSkeleton from "./PokeCardSkeleton";
 
 interface Props {
   pokemon: number | string;
+  typeFilter: string;
 }
 
-export default function PokeCard({ pokemon }: Props) {
+export default function PokeCard({ pokemon, typeFilter }: Props) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const { data, isLoading } = usePokemon(pokemon);
@@ -31,6 +32,7 @@ export default function PokeCard({ pokemon }: Props) {
     const postion = (document.documentElement || document.body).scrollTop;
     if (typeof window !== "undefined" && localStorage) {
       localStorage.setItem("scroll", postion.toString());
+      localStorage.setItem('typeFilter', typeFilter);
     }
   };
 

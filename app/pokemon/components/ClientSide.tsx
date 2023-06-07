@@ -68,7 +68,7 @@ export default function ClientSide( {gen}: Prop ) {
     }
     const filtered = allTypes[type]?.["pokemon"].map((p) => p.pokemon);
 
-    const filteredTypeList = mutingList.filter((pokemon) => {
+    const filteredTypeList = mutingList?.filter((pokemon) => {
       return filtered?.some((p) => p.name === pokemon.name);
     });
     setFilteredList(filteredTypeList);
@@ -119,7 +119,7 @@ export default function ClientSide( {gen}: Prop ) {
           />
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filteredList?.map((pokemon, index) => {
-              return <PokeCard key={index} pokemon={pokemon.name} />;
+              return <PokeCard key={index} pokemon={pokemon.name} typeFilter={currentTypeFilter} />;
             })}
           </div>
             {filteredList?.length === 0 && (
