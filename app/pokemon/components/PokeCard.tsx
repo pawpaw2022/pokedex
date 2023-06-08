@@ -62,7 +62,7 @@ export default function PokeCard({ pokemon, typeFilter }: Props) {
           <p className="text-md font-medium capitalize text-primary ">
             {displayName(data?.name)}
           </p>
-          <div className="flex mt-3">
+          <div className="flex my-2 md:my-3">
             {data?.types.map((type) => {
               return <TypeBadge key={type.slot} type={type.type.name} />;
             })}
