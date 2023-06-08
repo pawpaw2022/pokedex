@@ -13,11 +13,11 @@ export default function TypeBadge({ type }: Props) {
 
   return (
     <span
-      className="rounded-md mx-1 md:mx-2 py-2 md:py-2 flex uppercase text-xs xl:text-sm min-w-[95px] justify-center items-center text-gray-600"
+      className="rounded-md mx-1 md:mx-2 px-1 py-2 md:py-2 md:px-3 flex uppercase text-xs xl:text-sm justify-center items-center text-gray-600"
       style={{ backgroundColor: color }}
     >
       <Image 
-      className="mr-1.5"
+      className="mr-1.5 w-3 md:w-4"
       src={`/type-icons/${type}.svg`}
       alt={'type icon'} width={18} height={18} /> {type}
     </span>
