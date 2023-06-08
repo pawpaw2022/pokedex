@@ -5,19 +5,19 @@ import React from "react";
 
 type Props = {
   handleTypeFilter: (type: string) => void;
+  currentTypeFilter: string;
+  setCurrentTypeFilter: (type: string) => void;
 };
 
-export default function TypeFilter({ handleTypeFilter }: Props) {
+export default function TypeFilter({ handleTypeFilter, currentTypeFilter, setCurrentTypeFilter }: Props) {
   const [isOpen, setIsOpen] = React.useState(false);
-
-  const [currentType, setCurrentType] = React.useState("All");
 
   const toggle = () => setIsOpen((prev) => !prev);
 
   const handleClick = (id: number) => {
     const type = typeCode.filter((t) => t.id === id)[0]["name"];    
 
-    setCurrentType(type);
+    setCurrentTypeFilter(type);
     handleTypeFilter(type);
 
     setIsOpen(false);
@@ -31,9 +31,9 @@ export default function TypeFilter({ handleTypeFilter }: Props) {
           <button
             type="button"
             onClick={toggle}
-            className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            className="inline-flex capitalize w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
           >
-            {currentType}
+            {currentTypeFilter}
             <svg
               className="-mr-1 h-5 w-5 text-gray-400"
               viewBox="0 0 20 20"

@@ -12,7 +12,7 @@
 
 @layer components {
   .card {
-    @apply p-2 m-3 w-full lg:w-[220px] flex justify-center bg-white border ring-1 outline-none hover:ring-2 border-gray-400 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 ease-in-out duration-200;
+    @apply md:p-2 my-2 md:mx-2 w-[98%] lg:w-[220px] flex justify-center bg-white border ring-1 outline-none hover:ring-2 border-gray-400 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 ease-in-out duration-200;
   }
 
   .bg-color {

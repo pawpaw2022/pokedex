@@ -8,19 +8,23 @@ import GenFilter from './filters/GenFilter';
 import TypeFilter from "./filters/TypeFilter";
 
 type Props = {
-  handleGenFilter: (gen: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8) => void;
+  handleGenFilter: (gen: number) => void;
   handleTypeFilter: (type: string) => void;
   handleSearch: (search: string) => void;
   searchTerm: string;
   setSearchTerm: (search: string) => void;
+  currentGenFilter: number;
+  currentTypeFilter: string;
+  setCurrentGenFilter: (type: number) => void;
+  setCurrentTypeFilter: (type: string) => void;
 };
 
-export default function Filters({ handleGenFilter, handleTypeFilter, handleSearch, searchTerm, setSearchTerm}: Props) {
+export default function Filters({ handleGenFilter, handleTypeFilter, handleSearch, searchTerm, setSearchTerm, currentGenFilter, currentTypeFilter, setCurrentGenFilter, setCurrentTypeFilter}: Props) {
   return (
     <>
-      <div className="flex flex-row justify-center items-center mb-4">
-        <GenFilter handleGenFilter={handleGenFilter} />
-        <TypeFilter handleTypeFilter={handleTypeFilter} />
+      <div className="flex flex-row justify-center items-center my-4">
+        <GenFilter handleGenFilter={handleGenFilter} currentGenFilter={currentGenFilter} setCurrentGenFilter={setCurrentGenFilter}  />
+        <TypeFilter handleTypeFilter={handleTypeFilter} currentTypeFilter={currentTypeFilter} setCurrentTypeFilter={setCurrentTypeFilter} />
         <SearchBar handleSearch={handleSearch} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <DarkModeToggle />
       </div>

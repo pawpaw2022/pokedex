@@ -12,8 +12,7 @@ type Prop = {
   allTypes: any;
 };
 
-export default function ClientSide( {gen, allTypes}: Prop ) {
-
+export default function ClientSide({ gen, allTypes }: Prop) {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentGenFilter, setCurrentGenFilter] = useState(gen);
   const [currentTypeFilter, setCurrentTypeFilter] = useState("all");
@@ -31,8 +30,6 @@ export default function ClientSide( {gen, allTypes}: Prop ) {
     8: allData?.results.slice(809, 905),
     9: allData?.results.slice(905, 1010),
   };
-
-
 
   const currentList: CurrentList = pokemonGenList[currentGenFilter];
   const [filteredList, setFilteredList] = useState<CurrentList>([]);
@@ -93,19 +90,27 @@ export default function ClientSide( {gen, allTypes}: Prop ) {
   };
 
   const handleScroll = () => {
-    if (typeof window !== 'undefined' && localStorage && localStorage.getItem("scroll")) {
-      const scroll = localStorage.getItem("scroll")
+    if (
+      typeof window !== "undefined" &&
+      localStorage &&
+      localStorage.getItem("scroll")
+    ) {
+      const scroll = localStorage.getItem("scroll");
       window.scrollTo(0, parseInt(scroll));
       localStorage.removeItem("scroll");
     }
-  }
+  };
 
   handleScroll();
 
   return (
     <>
       <div className="md:flex justify-center md:w-[90%] mx-auto">
-        <GenSideBar handleGenFilter={handleGenFilter} currentGenFilter={currentGenFilter} setCurrentGenFilter={setCurrentGenFilter} />
+        <GenSideBar
+          handleGenFilter={handleGenFilter}
+          currentGenFilter={currentGenFilter}
+          setCurrentGenFilter={setCurrentGenFilter}
+        />
         <div
           className="md:p-4 rounded-lg shadow-lg border-2 border-solid border-gray-400 dark:border-gray-700
            bg-slate-300 dark:bg-slate-700"
@@ -116,20 +121,34 @@ export default function ClientSide( {gen, allTypes}: Prop ) {
             handleSearch={handleSearch}
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
+            currentGenFilter={currentGenFilter}
+            setCurrentGenFilter={setCurrentGenFilter}
+            currentTypeFilter={currentTypeFilter}
+            setCurrentTypeFilter={setCurrentTypeFilter}
           />
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filteredList?.map((pokemon, index) => {
-              return <PokeCard key={index} pokemon={pokemon.name} typeFilter={currentTypeFilter} />;
+              return (
+                <PokeCard
+                  key={index}
+                  pokemon={pokemon.name}
+                  typeFilter={currentTypeFilter}
+                />
+              );
             })}
           </div>
-            {filteredList?.length === 0 && (
-              <div className="flex flex-col justify-center items-center lg:w-[700px] xl:w-[980px] mt-6">
-                <h1 className="text-2xl font-bold uppercase">No pokemon found</h1>
-              </div>
-            )}
+          {filteredList?.length === 0 && (
+            <div className="flex flex-col justify-center items-center lg:w-[700px] xl:w-[980px] mt-6">
+              <h1 className="text-2xl font-bold uppercase">No pokemon found</h1>
+            </div>
+          )}
         </div>
 
-        <TypeSideBar handleTypeFilter={handleTypeFilter} currentTypeFilter={currentTypeFilter} setCurrentTypeFilter={setCurrentTypeFilter} />
+        <TypeSideBar
+          handleTypeFilter={handleTypeFilter}
+          currentTypeFilter={currentTypeFilter}
+          setCurrentTypeFilter={setCurrentTypeFilter}
+        />
       </div>
     </>
   );
