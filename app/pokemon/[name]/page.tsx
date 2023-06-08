@@ -32,9 +32,17 @@ export default async function PokemonDetail({ params }: Props) {
   const chainData = await fetchEvolutionChain(pokemon);
   const abilities = await fetchAbilities(pokemon);
   const moves = fetchMoves(pokemon);
-  const varities = await findAllFamilyVariety(chainData);
   const typeRelation = await fetchRelationship(pokemon);
-  
+
+  let varities = await findAllFamilyVariety(chainData);
+  if (!varities) {
+    varities = [[{
+      name: pokemon.name,
+      id: pokemon.id,
+      is_default: true,
+    }]]
+  }
+
   
   return (
     <>

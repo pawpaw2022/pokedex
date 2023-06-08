@@ -27,7 +27,7 @@ export default function TypeSideBar({
     localStorage.getItem("typeFilter")
   ) {
     const type = localStorage.getItem("typeFilter");
-    console.log(type);
+    // console.log(type);
     
     setTimeout(() => {
       handleClick(type);

@@ -168,7 +168,31 @@ export const findName = (input: string) => {
     return "wishiwashi-solo";
   } else if (input.includes("toxtricity")) {
     return "toxtricity-amped";
-  } else {
+  } else if (input.includes("zacian")) {
+    return "zacian-hero";
+  } else if (input.includes("zamazenta")) {
+    return "zamazenta-hero";
+  } else if (input.includes("calyrex")) {
+    return "calyrex-ice";
+  } else if (input.includes("glastrier")) {
+    return "glastrier-ice";
+  } else if (input.includes("spectrier")) {
+    return "spectrier-ice";
+  } else if (input.includes("urshifu")) {
+    return "urshifu-single-strike";
+  } else if (input.includes("giratina")) {
+    return "giratina-altered";
+  } else if (input.includes("shaymin")) {
+    return "shaymin-land";
+  } else if (input.includes("wormadam")) {
+    return "wormadam-plant";
+  } else if (input.includes("basculin")) {
+    return "basculin-red-striped";
+  } else if (input.includes("darmanitan")) {
+    return "darmanitan-standard";
+  } 
+  
+  else {
     return input;
   }
 };
@@ -189,18 +213,31 @@ export const excludeVariety = (name: string) => {
     !name.includes("-hisui") &&
     !name.includes("-eternamax") &&
     !name.includes("pikachu-") &&
-    !name.includes("-starter") 
+    !name.includes("-starter") &&
+    !name.includes("-partner") &&
+    !name.includes("-power-construct") 
+    
   );
 };
 
 export const findAllFamilyVariety = async(chainData: EvolutionChain) => {
+  try{
   const evolutionChain = await fetchEvolutionPokemon(chainData);
+
+  // evolutionChain.forEach((evolution) => {
+  //   console.log(evolution.species);
+  // });
+    
+  
   const chainName = evolutionChain.map((evolution) => {
     return {
-      name: evolution.species.name,
+      name: findName(evolution.species.name),
       id: parseInt(evolution.species.url.split("/")[6]),
     };
   });
+
+  console.log(chainName);
+  
 
   const family = await Promise.all(
     chainName.map(async (p) => {
@@ -215,6 +252,9 @@ export const findAllFamilyVariety = async(chainData: EvolutionChain) => {
   );
 
   return varities;
+  }catch(err){
+    console.log(err)
+  }
 }
 
 export const fetchEvolutionPokemon = async (evolutionChain: EvolutionChain) => {
@@ -239,6 +279,8 @@ export const fetchEvolutionPokemon = async (evolutionChain: EvolutionChain) => {
     }
   });
 
+  console.log(nameList);
+  
   const results = await fetchChainPokemon(nameList);
 
   return results;
