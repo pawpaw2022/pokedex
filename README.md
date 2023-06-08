@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pokedex Website
 
-## Getting Started
+This is a Pokedex website project that utilizes the following technologies: pokeapi, Next.js 13, Tailwind CSS, React Query, and TypeScript. The website provides various features to explore and search for Pokemon.
 
-First, run the development server:
+![Home Page Showcase](/public/showcase/home.png)
+![Home Page Showcase](/public/showcase/subpage.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The Pokedex website offers the following features:
 
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello) is an endpoint that uses [Route Handlers](https://beta.nextjs.org/docs/routing/route-handlers). This endpoint can be edited in `app/api/hello/route.ts`.
+1. Sorting Pokemon:
+   - Sort Pokemon by generation: Users can view Pokemon categorized by their respective generations.
+   - Sort Pokemon by type: Users can filter and display Pokemon based on their types.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Searching Pokemon:
+   - Search Pokemon by name: Users can search for specific Pokemon by their names.
 
-## Learn More
+3. Dark theme toggle: 
+    - Users can toggle between light and dark themes.
 
-To learn more about Next.js, take a look at the following resources:
+3. Pokemon Page:
+   - Upon entering a Pokemon's page, users can find detailed information about that Pokemon, including:
+     - Name: The name of the Pokemon.
+     - ID: A unique identifier for the Pokemon.
+     - Types: The elemental types associated with the Pokemon.
+     - Stats: Various statistical attributes of the Pokemon, such as HP, attack, defense, etc.
+     - Resistance and Weakness: Information about the Pokemon's strengths and weaknesses against different types.
+     - Evolution Chain: The evolutionary lineage of the Pokemon, showcasing its pre-evolved and evolved forms.
+     - Moves: The moves or abilities the Pokemon can learn and use.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technologies Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The Pokedex website is built using the following technologies:
 
-## Deploy on Vercel
+- **PokeAPI**: An API that provides data about Pokemon, including their characteristics, abilities, and more.
+- **Next.js 13**: A React framework that enables server-side rendering, static site generation, and other powerful features.
+- **Tailwind CSS**: A utility-first CSS framework that allows for rapid and efficient styling of web pages.
+- **React Query**: A library for managing, caching, and syncing asynchronous data in React applications.
+- **TypeScript**: A statically-typed superset of JavaScript that enhances development experience and catches potential errors.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The Pokedex website is currently deployed at [pokedex-xi-ruby.vercel.app](https://pokedex-xi-ruby.vercel.app).
+
+## PokeAPI
+
+The project utilizes the [PokeAPI](https://pokeapi.co/) as the source of Pokemon data.
