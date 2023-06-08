@@ -34,9 +34,9 @@ export default function Stats({ name, base_stat }: Props) {
       case "hp":
         return "HP";
       case "attack":
-        return "Attack";
+        return "Atk";
       case "defense":
-        return "Defense";
+        return "Def";
       case "special-attack":
         return "Sp. Atk";
       case "special-defense":
